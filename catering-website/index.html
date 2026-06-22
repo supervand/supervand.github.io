@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saveur — Premium Catering & Events</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #F5F0E8;
+    --warm-white: #FDFAF4;
+    --charcoal: #1A1814;
+    --brown: #3D2B1F;
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --sage: #7A8C6E;
+    --terracotta: #B85C38;
+    --text-muted: #6B6158;
+    --border: rgba(61,43,31,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--charcoal);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.25s ease;
+    opacity: 0.6;
+  }
+  a:hover ~ .cursor-ring, button:hover ~ .cursor-ring { transform: translate(-50%,-50%) scale(1.8); }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+    padding: 28px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: all 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(253,250,244,0.92);
+    backdrop-filter: blur(20px);
+    padding: 18px 60px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); font-style: italic; }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a {
+    font-size: 13px; font-weight: 400;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--charcoal); }
+  .nav-cta {
+    background: var(--charcoal); color: var(--cream);
+    padding: 12px 28px; border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--charcoal); }
+
+  /* HERO */
+  .hero {
+    height: 100vh; min-height: 700px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    position: relative; overflow: hidden;
+  }
+  .hero-left {
+    background: var(--charcoal);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 80px 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero-left::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 60%, rgba(201,168,76,0.15) 0%, transparent 60%);
+  }
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 24px;
+    display: flex; align-items: center; gap: 12px;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 40px; height: 1px; background: var(--gold);
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 6vw, 84px);
+    font-weight: 300; line-height: 1.05;
+    color: var(--cream);
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s ease 0.35s both;
+  }
+  .hero-title em { color: var(--gold); font-style: italic; display: block; }
+  .hero-desc {
+    font-size: 15px; line-height: 1.7; color: rgba(245,240,232,0.55);
+    max-width: 380px; margin-bottom: 48px;
+    animation: fadeUp 0.8s ease 0.5s both;
+  }
+  .hero-actions { display: flex; gap: 16px; animation: fadeUp 0.8s ease 0.65s both; }
+  .btn-primary {
+    background: var(--gold); color: var(--charcoal);
+    padding: 16px 36px; border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--cream);
+    padding: 16px 36px;
+    border: 1px solid rgba(245,240,232,0.25);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 400;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-stats {
+    position: absolute; bottom: 60px; right: 0;
+    display: flex; gap: 0;
+    animation: fadeUp 0.8s ease 0.8s both;
+  }
+  .stat-item {
+    padding: 20px 32px;
+    border-left: 1px solid rgba(245,240,232,0.1);
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; font-weight: 300;
+    color: var(--gold); line-height: 1;
+  }
+  .stat-label {
+    font-size: 10px; letter-spacing: 0.15em;
+    text-transform: uppercase; color: rgba(245,240,232,0.4);
+    margin-top: 6px;
+  }
+
+  .hero-right {
+    position: relative; overflow: hidden;
+  }
+  .hero-img-main {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    animation: scaleIn 1.2s ease both;
+  }
+  .hero-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(26,24,20,0.3) 100%);
+  }
+  .hero-tag {
+    position: absolute; bottom: 40px; left: 40px;
+    background: var(--warm-white);
+    padding: 20px 28px;
+    animation: fadeUp 0.8s ease 1s both;
+  }
+  .hero-tag-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); }
+  .hero-tag-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 400;
+    color: var(--charcoal); margin-top: 4px;
+  }
+
+  /* MARQUEE */
+  .marquee-bar {
+    background: var(--gold);
+    padding: 14px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-track {
+    display: inline-flex; gap: 0;
+    animation: marquee 20s linear infinite;
+  }
+  .marquee-item {
+    display: inline-flex; align-items: center; gap: 24px;
+    padding: 0 40px;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--charcoal);
+  }
+  .marquee-dot { width: 4px; height: 4px; background: var(--charcoal); border-radius: 50%; opacity: 0.4; }
+
+  /* ABOUT */
+  .about {
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 600px;
+  }
+  .about-images {
+    position: relative; overflow: hidden;
+    background: var(--cream);
+  }
+  .about-img-1 {
+    width: 75%; height: 70%;
+    object-fit: cover;
+    position: absolute; top: 0; left: 0;
+  }
+  .about-img-2 {
+    width: 55%; height: 55%;
+    object-fit: cover;
+    position: absolute; bottom: 0; right: 0;
+    border: 6px solid var(--warm-white);
+  }
+  .about-badge {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px; height: 120px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    z-index: 2;
+  }
+  .about-badge-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; font-weight: 400;
+    color: var(--charcoal); line-height: 1;
+  }
+  .about-badge-sub {
+    font-size: 9px; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--brown);
+    margin-top: 2px;
+  }
+  .about-content {
+    padding: 80px 72px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .section-eyebrow {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 24px;
+  }
+  .section-eyebrow::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--gold); }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 4vw, 54px);
+    font-weight: 300; line-height: 1.1;
+    color: var(--charcoal);
+    margin-bottom: 28px;
+  }
+  .section-title em { font-style: italic; color: var(--terracotta); }
+  .section-body {
+    font-size: 15px; line-height: 1.8;
+    color: var(--text-muted); margin-bottom: 40px;
+  }
+  .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px; }
+  .feature-item { display: flex; gap: 14px; align-items: flex-start; }
+  .feature-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 16px;
+  }
+  .feature-text h4 { font-size: 13px; font-weight: 500; color: var(--charcoal); margin-bottom: 4px; }
+  .feature-text p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  /* SERVICES */
+  .services { padding: 100px 60px; background: var(--charcoal); }
+  .services-header { text-align: center; margin-bottom: 64px; }
+  .services-header .section-eyebrow { justify-content: center; }
+  .services-header .section-eyebrow::after { display: none; }
+  .services-header .section-eyebrow::before { content: ''; flex: 0; width: 40px; height: 1px; background: var(--gold); }
+  .services-header .section-title { color: var(--cream); }
+  .services-header .section-body { color: rgba(245,240,232,0.5); max-width: 520px; margin: 0 auto 0; }
+
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .service-card {
+    background: rgba(255,255,255,0.03);
+    padding: 52px 40px;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.35s ease;
+    position: relative; overflow: hidden;
+    cursor: pointer;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.35s ease;
+  }
+  .service-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(201,168,76,0.3); }
+  .service-card:hover::before { opacity: 1; }
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px; font-weight: 300;
+    color: rgba(201,168,76,0.15);
+    line-height: 1; margin-bottom: 24px;
+    transition: color 0.35s;
+  }
+  .service-card:hover .service-num { color: rgba(201,168,76,0.35); }
+  .service-icon { font-size: 28px; margin-bottom: 20px; }
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 400;
+    color: var(--cream); margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .service-desc { font-size: 13px; line-height: 1.7; color: rgba(245,240,232,0.45); margin-bottom: 28px; }
+  .service-link {
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+    transition: gap 0.2s;
+  }
+  .service-card:hover .service-link { gap: 16px; }
+  .service-link::after { content: '→'; }
+
+  /* MENU SECTION */
+  .menu-section { padding: 100px 60px; }
+  .menu-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
+  .menu-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); }
+  .menu-tab {
+    padding: 14px 28px; background: none; border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 400;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-muted); cursor: pointer;
+    position: relative; transition: color 0.2s;
+  }
+  .menu-tab.active, .menu-tab:hover { color: var(--charcoal); }
+  .menu-tab.active::after {
+    content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+    height: 2px; background: var(--gold);
+  }
+  .menu-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  .menu-card { position: relative; }
+  .menu-img-wrap {
+    aspect-ratio: 3/4; overflow: hidden;
+    margin-bottom: 20px; position: relative;
+  }
+  .menu-img-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .menu-card:hover .menu-img-wrap img { transform: scale(1.06); }
+  .menu-badge {
+    position: absolute; top: 16px; left: 16px;
+    background: var(--gold); color: var(--charcoal);
+    font-size: 9px; font-weight: 500;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 5px 12px;
+  }
+  .menu-item-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 400;
+    color: var(--charcoal); margin-bottom: 8px;
+  }
+  .menu-item-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; }
+  .menu-item-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 400;
+    color: var(--gold);
+  }
+  .menu-item-price span { font-size: 12px; color: var(--text-muted); }
+
+  /* PROCESS */
+  .process { padding: 100px 60px; background: var(--cream); }
+  .process-inner { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: center; }
+  .process-steps { display: flex; flex-direction: column; gap: 0; }
+  .process-step {
+    padding: 32px 0; border-bottom: 1px solid var(--border);
+    display: grid; grid-template-columns: 60px 1fr;
+    gap: 24px; align-items: start;
+    transition: all 0.3s;
+    cursor: default;
+  }
+  .process-step:first-child { border-top: 1px solid var(--border); }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px; font-weight: 300;
+    color: var(--border); line-height: 1;
+    transition: color 0.3s;
+  }
+  .process-step:hover .step-num { color: var(--gold); }
+  .step-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 400;
+    color: var(--charcoal); margin-bottom: 8px;
+  }
+  .step-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+  /* TESTIMONIALS */
+  .testimonials { padding: 100px 60px; position: relative; overflow: hidden; }
+  .testimonials::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 400px; font-weight: 300;
+    color: rgba(201,168,76,0.06);
+    position: absolute; top: -60px; left: 40px;
+    line-height: 1; pointer-events: none;
+  }
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; }
+  .testi-card {
+    padding: 44px 36px;
+    border: 1px solid var(--border);
+    position: relative;
+    transition: all 0.3s;
+  }
+  .testi-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .testi-stars { color: var(--gold); font-size: 14px; letter-spacing: 2px; margin-bottom: 20px; }
+  .testi-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-style: italic; font-weight: 300;
+    color: var(--charcoal); line-height: 1.6;
+    margin-bottom: 28px;
+  }
+  .testi-author { display: flex; align-items: center; gap: 14px; }
+  .testi-avatar {
+    width: 46px; height: 46px; border-radius: 50%;
+    object-fit: cover; flex-shrink: 0;
+    border: 2px solid var(--border);
+  }
+  .testi-name { font-size: 14px; font-weight: 500; color: var(--charcoal); }
+  .testi-event { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  /* GALLERY */
+  .gallery { padding: 80px 0 0; }
+  .gallery-header { padding: 0 60px 48px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 320px 320px;
+    gap: 4px;
+  }
+  .gallery-item { overflow: hidden; position: relative; }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+  .gallery-item:hover img { transform: scale(1.05); }
+  .gallery-item:nth-child(1) { grid-row: 1 / 3; }
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(26,24,20,0.5) 0%, transparent 50%);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+  /* CTA SECTION */
+  .cta-section {
+    padding: 120px 60px;
+    background: var(--charcoal);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%);
+    right: -100px; top: -100px;
+    pointer-events: none;
+  }
+  .cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(44px, 5vw, 68px);
+    font-weight: 300; line-height: 1.1;
+    color: var(--cream);
+  }
+  .cta-title em { color: var(--gold); font-style: italic; }
+  .cta-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,240,232,0.4); }
+  .form-input {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--cream); padding: 14px 18px;
+    font-family: 'DM Sans', sans-serif; font-size: 14px;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-input:focus { border-color: var(--gold); }
+  .form-input::placeholder { color: rgba(245,240,232,0.25); }
+  .form-select {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--cream); padding: 14px 18px;
+    font-family: 'DM Sans', sans-serif; font-size: 14px;
+    appearance: none; outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-select:focus { border-color: var(--gold); }
+  .form-select option { background: var(--charcoal); }
+
+  /* FOOTER */
+  footer {
+    background: var(--brown);
+    padding: 72px 60px 40px;
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px; margin-bottom: 56px;
+    padding-bottom: 56px; border-bottom: 1px solid rgba(245,240,232,0.1);
+  }
+  .footer-brand .nav-logo { display: block; margin-bottom: 20px; font-size: 28px; }
+  .footer-tagline { font-size: 14px; line-height: 1.7; color: rgba(245,240,232,0.45); margin-bottom: 28px; max-width: 280px; }
+  .social-links { display: flex; gap: 12px; }
+  .social-link {
+    width: 38px; height: 38px;
+    border: 1px solid rgba(245,240,232,0.15);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(245,240,232,0.5);
+    font-size: 14px; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .social-link:hover { border-color: var(--gold); color: var(--gold); }
+  .footer-col h4 {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px; font-weight: 500;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-links a {
+    font-size: 14px; color: rgba(245,240,232,0.45);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--cream); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-copy { font-size: 12px; color: rgba(245,240,232,0.3); }
+  .footer-legal { display: flex; gap: 24px; }
+  .footer-legal a { font-size: 12px; color: rgba(245,240,232,0.3); text-decoration: none; }
+  .footer-legal a:hover { color: var(--cream); }
+
+  /* FLOATING CTA */
+  .floating-cta {
+    position: fixed; bottom: 32px; right: 32px; z-index: 400;
+    background: var(--gold); color: var(--charcoal);
+    padding: 16px 28px; border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(201,168,76,0.35);
+    transition: all 0.25s ease;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .floating-cta:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(201,168,76,0.45); }
+  .floating-dot { width: 8px; height: 8px; background: var(--charcoal); border-radius: 50%; animation: pulse 2s infinite; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scaleIn {
+    from { transform: scale(1.08); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: all 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1; transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Sav<span>eur</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#services">Layanan</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#gallery">Galeri</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Konsultasi Gratis</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Premium Catering Jakarta</div>
+    <h1 class="hero-title">
+      Setiap Momen
+      <em>Layak Dikenang</em>
+    </h1>
+    <p class="hero-desc">Kami menghadirkan pengalaman kuliner premium untuk acara Anda. Dari intimate gathering hingga gala dinner ribuan tamu.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Pesan Sekarang</button>
+      <button class="btn-outline" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Lihat Menu</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">12+</div>
+        <div class="stat-label">Tahun</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4.8k</div>
+        <div class="stat-label">Event</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">98%</div>
+        <div class="stat-label">Kepuasan</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=900&q=80" alt="Catering" class="hero-img-main">
+    <div class="hero-img-overlay"></div>
+    <div class="hero-tag">
+      <div class="hero-tag-label">Chef Terbaik</div>
+      <div class="hero-tag-text">Berpengalaman & Bersertifikat</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="marquee-dot"></span>Pernikahan Mewah</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Corporate Event</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Ulang Tahun</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Gathering Keluarga</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Seminar & Konferensi</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Gala Dinner</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Pernikahan Mewah</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Corporate Event</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Ulang Tahun</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Gathering Keluarga</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Seminar & Konferensi</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Gala Dinner</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-images">
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700&q=80" alt="Fine dining" class="about-img-1">
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&q=80" alt="Dish" class="about-img-2">
+    <div class="about-badge">
+      <div class="about-badge-text">No.1</div>
+      <div class="about-badge-sub">Jakarta</div>
+    </div>
+  </div>
+  <div class="about-content reveal">
+    <div class="section-eyebrow">Tentang Saveur</div>
+    <h2 class="section-title">Passion Untuk<br><em>Kuliner Terbaik</em></h2>
+    <p class="section-body">Saveur berdiri sejak 2012 dengan misi sederhana: menghadirkan cita rasa restoran bintang lima langsung ke acara Anda. Setiap hidangan kami dibuat dari bahan premium pilihan, dengan sentuhan chef berpengalaman internasional.</p>
+    <div class="about-features">
+      <div class="feature-item">
+        <div class="feature-icon">🌿</div>
+        <div class="feature-text">
+          <h4>Bahan Segar Premium</h4>
+          <p>Dipilih langsung setiap pagi dari sumber terpercaya</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">👨‍🍳</div>
+        <div class="feature-text">
+          <h4>Chef Profesional</h4>
+          <p>Tim chef bersertifikat internasional & berpengalaman</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">📋</div>
+        <div class="feature-text">
+          <h4>Menu Customizable</h4>
+          <p>Sesuaikan menu dengan tema & selera Anda</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">✨</div>
+        <div class="feature-text">
+          <h4>Dekorasi Elegan</h4>
+          <p>Setup meja dan display hidangan yang memukau</p>
+        </div>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Pelajari Lebih Lanjut</button>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header reveal">
+    <div class="section-eyebrow">Layanan Kami</div>
+    <h2 class="section-title" style="color:var(--cream)">Solusi Lengkap<br>Untuk Setiap Acara</h2>
+    <p class="section-body">Dari intimate gathering 20 orang hingga gala dinner 2000 tamu, kami siap menghadirkan pengalaman terbaik.</p>
+  </div>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-icon">💍</div>
+      <div class="service-name">Wedding Catering</div>
+      <p class="service-desc">Jadikan hari spesial Anda sempurna dengan hidangan mewah yang tak terlupakan untuk seluruh tamu undangan.</p>
+      <a href="#contact" class="service-link">Konsultasi</a>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-icon">🏢</div>
+      <div class="service-name">Corporate Events</div>
+      <p class="service-desc">Tingkatkan citra perusahaan Anda dengan sajian profesional untuk meeting, seminar, dan company gathering.</p>
+      <a href="#contact" class="service-link">Konsultasi</a>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-icon">🎉</div>
+      <div class="service-name">Private Party</div>
+      <p class="service-desc">Ulang tahun, reuni, atau perayaan keluarga — kami hadirkan suasana festive dengan menu spesial pilihan.</p>
+      <a href="#contact" class="service-link">Konsultasi</a>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-icon">🍽️</div>
+      <div class="service-name">Gala Dinner</div>
+      <p class="service-desc">Fine dining experience dengan plated service eksklusif, wine pairing, dan pelayanan setara restoran bintang lima.</p>
+      <a href="#contact" class="service-link">Konsultasi</a>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-icon">🥗</div>
+      <div class="service-name">Buffet Premium</div>
+      <p class="service-desc">Variasi hidangan lengkap dengan live cooking station, carving station, dan dessert corner yang menggugah selera.</p>
+      <a href="#contact" class="service-link">Konsultasi</a>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-icon">📦</div>
+      <div class="service-name">Box Catering</div>
+      <p class="service-desc">Solusi praktis dan higienis untuk meeting, seminar, dan acara dengan kemasan premium yang berkesan.</p>
+      <a href="#contact" class="service-link">Konsultasi</a>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-header reveal">
+    <div>
+      <div class="section-eyebrow">Signature Menu</div>
+      <h2 class="section-title">Pilihan<br><em>Terbaik Kami</em></h2>
+    </div>
+    <div class="menu-tabs">
+      <button class="menu-tab active">Pembuka</button>
+      <button class="menu-tab">Utama</button>
+      <button class="menu-tab">Dessert</button>
+      <button class="menu-tab">Minuman</button>
+    </div>
+  </div>
+  <div class="menu-grid reveal">
+    <div class="menu-card">
+      <div class="menu-img-wrap">
+        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&q=80" alt="Salad">
+        <div class="menu-badge">Chef's Pick</div>
+      </div>
+      <div class="menu-item-name">Garden Salad Premium</div>
+      <div class="menu-item-desc">Mixed greens, cherry tomato, cucumber, house dressing</div>
+      <div class="menu-item-price">Rp 45.000 <span>/ porsi</span></div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-img-wrap">
+        <img src="https://images.unsplash.com/photo-1541014741259-de529411b96a?w=500&q=80" alt="Soup">
+        <div class="menu-badge">Favorit</div>
+      </div>
+      <div class="menu-item-name">Cream of Mushroom</div>
+      <div class="menu-item-desc">Wild mushroom, cream, truffle oil, crispy bread</div>
+      <div class="menu-item-price">Rp 55.000 <span>/ porsi</span></div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-img-wrap">
+        <img src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=500&q=80" alt="Bruschetta">
+      </div>
+      <div class="menu-item-name">Bruschetta Classica</div>
+      <div class="menu-item-desc">Toasted bread, fresh tomato, basil, extra virgin olive oil</div>
+      <div class="menu-item-price">Rp 40.000 <span>/ porsi</span></div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-img-wrap">
+        <img src="https://images.unsplash.com/photo-1576402187878-974f70c890a5?w=500&q=80" alt="Platter">
+        <div class="menu-badge">New</div>
+      </div>
+      <div class="menu-item-name">Charcuterie Platter</div>
+      <div class="menu-item-desc">Assorted cheese, cured meats, fruits, crackers</div>
+      <div class="menu-item-price">Rp 180.000 <span>/ platter</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="process-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Cara Kerja</div>
+      <h2 class="section-title">Proses Mudah & <em>Transparan</em></h2>
+      <p class="section-body">Kami memastikan setiap langkah perencanaan acara Anda berjalan mulus, dari konsultasi awal hingga setelah acara selesai.</p>
+      <br>
+      <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Mulai Sekarang</button>
+    </div>
+    <div class="process-steps reveal">
+      <div class="process-step">
+        <div class="step-num">01</div>
+        <div>
+          <div class="step-name">Konsultasi & Brief</div>
+          <p class="step-desc">Ceritakan visi Anda. Tim kami akan mendengarkan setiap detail kebutuhan acara Anda secara mendalam.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">02</div>
+        <div>
+          <div class="step-name">Penyusunan Proposal</div>
+          <p class="step-desc">Kami menyiapkan proposal lengkap dengan pilihan menu, estimasi biaya, dan detail teknis dalam 24 jam.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">03</div>
+        <div>
+          <div class="step-name">Food Tasting</div>
+          <p class="step-desc">Nikmati sesi food tasting eksklusif untuk memastikan menu yang dipilih sesuai dengan selera Anda.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">04</div>
+        <div>
+          <div class="step-name">Eksekusi Sempurna</div>
+          <p class="step-desc">Tim profesional kami hadir H-2 untuk persiapan dan memastikan hari-H berjalan sempurna tanpa hambatan.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div style="padding:0 0 0 0;" class="reveal">
+    <div class="section-eyebrow">Testimoni</div>
+    <h2 class="section-title">Kata Mereka<br><em>Tentang Kami</em></h2>
+  </div>
+  <div class="testi-grid reveal">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Saveur benar-benar membuat pernikahan kami luar biasa. Tamu dari luar kota pun memuji cita rasa hidangannya!"</p>
+      <div class="testi-author">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="Sarah" class="testi-avatar">
+        <div>
+          <div class="testi-name">Sarah & Reza</div>
+          <div class="testi-event">Wedding, 350 Tamu · Maret 2024</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Profesional, tepat waktu, dan kualitas hidangan di atas ekspektasi kami. Sangat rekomendasikan untuk event korporat."</p>
+      <div class="testi-author">
+        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80" alt="Budi" class="testi-avatar">
+        <div>
+          <div class="testi-name">Budi Santoso</div>
+          <div class="testi-event">Annual Dinner PT ABC · 2024</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Menu fusion yang unik dan presentasi yang cantik sekali. Semua tamu di ulang tahun mama kami sangat terkesan!"</p>
+      <div class="testi-author">
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Dita" class="testi-avatar">
+        <div>
+          <div class="testi-name">Dita Maharani</div>
+          <div class="testi-event">Birthday Party · Februari 2024</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="gallery-header reveal">
+    <div>
+      <div class="section-eyebrow">Galeri</div>
+      <h2 class="section-title">Momen yang<br><em>Kami Ciptakan</em></h2>
+    </div>
+    <a href="#contact" style="text-decoration:none">
+      <button class="btn-primary">Lihat Semua</button>
+    </a>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800&q=80" alt="Wedding setup">
+      <div class="gallery-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&q=80" alt="Plated dish">
+      <div class="gallery-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?w=600&q=80" alt="Chef">
+      <div class="gallery-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1530062845289-9109b2c9c868?w=600&q=80" alt="Dessert">
+      <div class="gallery-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80" alt="Food">
+      <div class="gallery-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section class="cta-section" id="contact">
+  <div class="reveal">
+    <div class="section-eyebrow" style="color:var(--gold)">Hubungi Kami</div>
+    <h2 class="cta-title">Wujudkan<br>Acara <em>Impian</em><br>Anda Bersama Kami</h2>
+    <br>
+    <p style="font-size:14px;color:rgba(245,240,232,0.45);line-height:1.7;margin-top:16px">Tim konsultan kami siap membantu Anda 24/7. Konsultasi awal <strong style="color:var(--gold)">gratis</strong> tanpa komitmen.</p>
+    <br>
+    <div style="display:flex;gap:24px;margin-top:32px">
+      <div>
+        <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,240,232,0.35);margin-bottom:6px">WhatsApp</div>
+        <div style="font-size:16px;color:var(--cream)">+62 812-3456-7890</div>
+      </div>
+      <div style="width:1px;background:rgba(255,255,255,0.08)"></div>
+      <div>
+        <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,240,232,0.35);margin-bottom:6px">Email</div>
+        <div style="font-size:16px;color:var(--cream)">hello@saveur.id</div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <form class="cta-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Nama Lengkap</label>
+          <input type="text" class="form-input" placeholder="John Doe">
+        </div>
+        <div class="form-group">
+          <label class="form-label">No. WhatsApp</label>
+          <input type="tel" class="form-input" placeholder="+62 812 xxxx xxxx">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Jenis Acara</label>
+        <select class="form-select">
+          <option>Pilih jenis acara...</option>
+          <option>Wedding / Pernikahan</option>
+          <option>Corporate Event</option>
+          <option>Ulang Tahun</option>
+          <option>Gala Dinner</option>
+          <option>Gathering</option>
+          <option>Lainnya</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Tanggal Acara</label>
+          <input type="date" class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Jumlah Tamu</label>
+          <input type="number" class="form-input" placeholder="e.g. 200">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Catatan Tambahan</label>
+        <input type="text" class="form-input" placeholder="Tema, preferensi menu, lokasi...">
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%;padding:18px;font-size:13px;margin-top:8px" id="submitBtn">
+        Kirim Permintaan Konsultasi →
+      </button>
+    </form>
+    <div id="successMsg" style="display:none;padding:32px;text-align:center;border:1px solid rgba(201,168,76,0.3);margin-top:16px">
+      <div style="font-size:32px;margin-bottom:12px">✓</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--cream);margin-bottom:8px">Terima Kasih!</div>
+      <div style="font-size:13px;color:rgba(245,240,232,0.5)">Tim kami akan menghubungi Anda dalam 1×24 jam.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">Sav<span>eur</span></a>
+      <p class="footer-tagline">Premium catering untuk momen-momen berharga dalam hidup Anda. Melayani seluruh Jabodetabek & sekitarnya.</p>
+      <div class="social-links">
+        <a href="#" class="social-link">ig</a>
+        <a href="#" class="social-link">fb</a>
+        <a href="#" class="social-link">yt</a>
+        <a href="#" class="social-link">tk</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Layanan</h4>
+      <ul class="footer-links">
+        <li><a href="#">Wedding Catering</a></li>
+        <li><a href="#">Corporate Events</a></li>
+        <li><a href="#">Private Party</a></li>
+        <li><a href="#">Gala Dinner</a></li>
+        <li><a href="#">Box Catering</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Perusahaan</h4>
+      <ul class="footer-links">
+        <li><a href="#">Tentang Kami</a></li>
+        <li><a href="#">Tim Kami</a></li>
+        <li><a href="#">Portfolio</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Karir</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kontak</h4>
+      <ul class="footer-links">
+        <li><a href="#">+62 812-3456-7890</a></li>
+        <li><a href="#">hello@saveur.id</a></li>
+        <li><a href="#">Jl. Kemang Raya No. 88, Jakarta Selatan</a></li>
+        <li><a href="#">Mon–Sat: 08.00–20.00 WIB</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2024 Saveur. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Sitemap</a>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING CTA -->
+<button class="floating-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+  <div class="floating-dot"></div>
+  Konsultasi Gratis
+</button>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', (e) => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  setTimeout(() => {
+    ring.style.left = e.clientX + 'px';
+    ring.style.top = e.clientY + 'px';
+  }, 60);
+});
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%,-50%) scale(2)'; ring.style.transform = 'translate(-50%,-50%) scale(1.5)'; });
+  el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.transform = 'translate(-50%,-50%) scale(1)'; });
+});
+
+// Navbar scroll
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Menu tabs
+document.querySelectorAll('.menu-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+
+// Form submit
+function handleSubmit(e) {
+  e.preventDefault();
+  document.querySelector('.cta-form').style.display = 'none';
+  document.getElementById('successMsg').style.display = 'block';
+}
+</script>
+</body>
+</html>
