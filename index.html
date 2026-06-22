@@ -250,7 +250,7 @@
     <!-- HERO -->
     <section
       id="home"
-      class="relative pt-20 pb-12 lg:pt-24 lg:pb-20 px-6 overflow-hidden bg-paper"
+      class="relative pt-8 pb-12 lg:pt-24 lg:pb-20 px-6 overflow-hidden bg-paper"
     >
       <div
         class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none opacity-40 mix-blend-multiply"
@@ -267,69 +267,210 @@
         class="container mx-auto grid lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10"
       >
         <div class="lg:col-span-7 flex flex-col justify-center">
-          <div class="mb-6">
-            <span
-              class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-moss/10 border border-moss/20 font-mono text-[11px] font-medium text-moss uppercase tracking-wider"
-            >
-              <span class="w-2 h-2 rounded-full bg-moss animate-pulse"></span>
-              ONLINE
-            </span>
-          </div>
-
-          <h1
-            class="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.05] text-ink"
-          >
-            Bisnis Anda butuh
-            <span class="text-blueprint relative inline-block"
-              >sistem yang bekerja,</span
-            ><br class="hidden sm:inline" />
-            bukan sekadar landing page.
-          </h1>
-
-          <p
-            class="text-base sm:text-lg text-ink/70 max-w-xl mb-10 leading-relaxed"
-          >
-            Saya <span class="font-semibold text-ink">Arvand Ghani</span> — Web
-            Developer yang fokus membangun sistem digital nyata: booking,
-            reservasi, hingga manajemen operasional menggunakan
-            <span class="font-semibold text-blueprint"
-              >PHP, MySQL, & Tailwind CSS</span
-            >.
-          </p>
-
-          <div
-            class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-12"
-          >
-            <a
-              href="#work"
-              class="bg-blueprint text-paper px-8 py-4 rounded-xl font-medium hover:bg-ink transition-all duration-300 shadow-lg shadow-blueprint/15 text-center transform hover:-translate-y-0.5"
-            >
-              Lihat contoh proyek
-            </a>
-            <a
-              href="https://wa.me/6281252626305?text=Halo,%20saya%20tertarik%20buat%20website"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="bg-transparent border border-ink/20 text-ink px-8 py-4 rounded-xl font-medium hover:border-copper hover:text-copper transition-all duration-300 text-center transform hover:-translate-y-0.5"
-            >
-              Diskusi Gratis via WhatsApp
-            </a>
-          </div>
-
-          <div class="border-t border-ink/10 pt-6">
+          <div class="block lg:hidden w-full max-w-md mx-auto">
             <div
-              class="flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-xs text-ink/50 uppercase tracking-wider"
+              class="flex items-center justify-between mb-5 border-b border-ink/5 pb-3"
             >
-              <div class="flex items-center gap-2">
-                <span class="text-copper font-bold">2-4</span> Yrs Experience
+              <span
+                class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-moss/10 border border-moss/20 font-mono text-[10px] font-medium text-moss uppercase tracking-wider"
+              >
+                <span
+                  class="w-1.5 h-1.5 rounded-full bg-moss animate-pulse"
+                ></span>
+                Sistem Aktif
+              </span>
+              <span class="font-mono text-[10px] text-ink/40 tracking-widest"
+                >// ARVAND.DEV</span
+              >
+            </div>
+
+            <h1
+              class="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-3 leading-[1.15] text-ink"
+            >
+              Bukan Sekadar Tampilan.<br />
+              Saya Bangun <span class="text-blueprint">Sistem Kerja.</span>
+            </h1>
+
+            <p class="text-sm text-ink/70 mb-6 leading-relaxed">
+              Kembangkan bisnis Anda dengan web berbasis database dan logic yang
+              kuat. Dirancang menggunakan
+              <strong>PHP, MySQL, & Tailwind CSS</strong>.
+            </p>
+
+            <div
+              class="relative bg-white border border-ink/10 rounded-xl p-4 mb-6 shadow-sm overflow-hidden"
+            >
+              <div
+                class="absolute -right-4 -bottom-4 opacity-10 pointer-events-none"
+              >
+                <svg
+                  width="100"
+                  height="100"
+                  fill="currentColor"
+                  class="text-ink"
+                >
+                  <defs>
+                    <pattern
+                      id="m-grid"
+                      width="10"
+                      height="10"
+                      patternUnits="userSpaceOnUse"
+                    >
+                      <circle cx="1" cy="1" r="1" fill="currentColor" />
+                    </pattern>
+                  </defs>
+                  <rect width="100" height="100" fill="url(#m-grid)" />
+                </svg>
               </div>
-              <span class="text-ink/20 hidden sm:inline">•</span>
-              <div class="flex items-center gap-2">
-                <span class="text-copper font-bold">4+</span> Production Systems
+
+              <div
+                class="flex items-center justify-between mb-3 font-mono text-[10px] text-ink/40"
+              >
+                <div class="flex gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-blueprint/40"></span>
+                  <span class="w-2 h-2 rounded-full bg-copper/40"></span>
+                </div>
+                <span>status: connected</span>
               </div>
-              <span class="text-ink/20 hidden sm:inline">•</span>
-              <div class="flex items-center gap-2">
-                PHP · MySQL · JavaScript
+
+              <div class="space-y-2">
+                <div class="flex items-center gap-3">
+                  <div class="p-1.5 bg-blueprint/10 rounded-md text-blueprint">
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4 7v10c0 2.21 3.58 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.58 4 8 4s8-1.79 8-4M4 7c0-2.21 3.58-4 8-4s8 1.79 8 4m0 5c0 2.21-3.58 4-8 4s-8-1.79-8-4"
+                      />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <div class="h-2 w-24 bg-ink/15 rounded"></div>
+                    <div class="h-1.5 w-16 bg-ink/5 rounded mt-1"></div>
+                  </div>
+                  <span
+                    class="font-mono text-[9px] px-1.5 py-0.5 rounded bg-moss/10 text-moss font-bold"
+                    >MySQL</span
+                  >
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="p-1.5 bg-copper/10 rounded-md text-copper">
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M11 4a2 2 0 114 0v1a2 2 0 002 2h3a1 1 0 011 1v1a2 2 0 002 2v3a1 1 0 01-1 1h-1a2 2 0 00-2 2v1a2 2 0 01-2 2H11a2 2 0 01-2-2v-1a2 2 0 00-2-2H4a1 1 0 01-1-1v-3a2 2 0 00-2-2V9a1 1 0 011-1h1a2 2 0 002-2V4a2 2 0 012-2h3a2 2 0 002 2V4z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <div class="h-2 w-32 bg-ink/15 rounded"></div>
+                    <div class="h-1.5 w-12 bg-ink/5 rounded mt-1"></div>
+                  </div>
+                  <span
+                    class="font-mono text-[9px] px-1.5 py-0.5 rounded bg-blueprint/10 text-blueprint font-bold"
+                    >Logic</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-2.5">
+              <a
+                href="#work"
+                class="bg-blueprint text-paper px-6 py-3.5 rounded-xl font-medium text-sm text-center shadow-sm"
+              >
+                Lihat Proyek
+              </a>
+              <a
+                href="https://wa.me/123?text=Halo,%20saya%20tertarik%20buat%20website"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-transparent border border-ink/15 text-ink px-6 py-3.5 rounded-xl text-sm font-medium text-center"
+              >
+                Diskusi via WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <div class="hidden lg:block">
+            <div class="mb-6">
+              <span
+                class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-moss/10 border border-moss/20 font-mono text-[11px] font-medium text-moss uppercase tracking-wider"
+              >
+                <span class="w-2 h-2 rounded-full bg-moss animate-pulse"></span>
+                ONLINE
+              </span>
+            </div>
+
+            <h1
+              class="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.05] text-ink"
+            >
+              Bisnis Anda butuh
+              <span class="text-blueprint relative inline-block"
+                >sistem yang bekerja,</span
+              ><br class="hidden sm:inline" />
+              bukan sekadar landing page.
+            </h1>
+
+            <p
+              class="text-base sm:text-lg text-ink/70 max-w-xl mb-10 leading-relaxed"
+            >
+              Saya <span class="font-semibold text-ink">Arvand Ghani</span> —
+              Web Developer yang fokus membangun sistem digital nyata: booking,
+              reservasi, hingga manajemen operasional menggunakan
+              <span class="font-semibold text-blueprint"
+                >PHP, MySQL, & Tailwind CSS</span
+              >.
+            </p>
+
+            <div
+              class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-12"
+            >
+              <a
+                href="#work"
+                class="bg-blueprint text-paper px-8 py-4 rounded-xl font-medium hover:bg-ink transition-all duration-300 shadow-lg shadow-blueprint/15 text-center transform hover:-translate-y-0.5"
+              >
+                Lihat contoh proyek
+              </a>
+              <a
+                href="https://wa.me/123?text=Halo,%20saya%20tertarik%20buat%20website"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-transparent border border-ink/20 text-ink px-8 py-4 rounded-xl font-medium hover:border-copper hover:text-copper transition-all duration-300 text-center transform hover:-translate-y-0.5"
+              >
+                Diskusi Gratis via WhatsApp
+              </a>
+            </div>
+
+            <div class="border-t border-ink/10 pt-6">
+              <div
+                class="flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-xs text-ink/50 uppercase tracking-wider"
+              >
+                <div class="flex items-center gap-2">
+                  <span class="text-copper font-bold">2-4</span> Yrs Experience
+                </div>
+                <span class="text-ink/20 hidden sm:inline">•</span>
+                <div class="flex items-center gap-2">
+                  <span class="text-copper font-bold">4+</span> Production
+                  Systems
+                </div>
+                <span class="text-ink/20 hidden sm:inline">•</span>
+                <div class="flex items-center gap-2">
+                  PHP · MySQL · JavaScript
+                </div>
               </div>
             </div>
           </div>
@@ -538,6 +679,7 @@
       </div>
     </section>
 
+<!-- PROFILE -->
     <section id="about" class="py-12 lg:py-24 px-6 bg-white">
       <div class="container mx-auto">
         <div class="block lg:hidden max-w-md mx-auto">
