@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kamar & Villa — Lumière Resort & Spa</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black:    #0D0B09;
+  --deep:     #151210;
+  --gold:     #C8A96E;
+  --gold-lt:  #E2CA9A;
+  --ivory:    #F5EFE4;
+  --ivory-dk: #EAE0D0;
+  --stone:    #9A8E7E;
+  --muted:    #6B6055;
+  --border:   rgba(200,169,110,0.18);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Jost', sans-serif; background: var(--black); color: var(--ivory); overflow-x: hidden; }
+
+body::after {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  background: rgba(13,11,9,0.92); backdrop-filter: blur(20px);
+  padding: 18px 60px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 400; color: var(--ivory); text-decoration: none; letter-spacing: 0.04em; }
+.nav-logo span { color: var(--gold); font-style: italic; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a { font-size: 12px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--stone); text-decoration: none; transition: color 0.25s; }
+.nav-links a:hover, .nav-links a.active { color: var(--gold); }
+.nav-book { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 11px 28px; font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer; transition: all 0.25s; text-decoration: none; }
+.nav-book:hover { background: var(--gold); color: var(--black); }
+.nav-ham { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 601; }
+.nav-ham span { display: block; width: 22px; height: 1.5px; background: var(--ivory); transition: all 0.3s; }
+.nav-ham.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-ham.open span:nth-child(2) { opacity: 0; }
+.nav-ham.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.mob-menu { display: none; position: fixed; inset: 0; z-index: 600; background: var(--deep); flex-direction: column; align-items: center; justify-content: center; gap: 32px; opacity: 0; transition: opacity 0.3s; }
+.mob-menu.open { opacity: 1; }
+.mob-menu a { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 400; color: var(--ivory); text-decoration: none; transition: color 0.2s; }
+.mob-menu a:hover { color: var(--gold); }
+.mob-menu .mob-book { border: 1px solid var(--gold); color: var(--gold); padding: 14px 40px; font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; background: none; cursor: pointer; text-decoration: none; margin-top: 8px; }
+
+/* ── PAGE HERO ── */
+.page-hero {
+  padding: 140px 60px 72px;
+  background: var(--deep);
+  border-bottom: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(200,169,110,0.07) 0%, transparent 60%);
+}
+.breadcrumb { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
+.breadcrumb a { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--gold); }
+.breadcrumb span { font-size: 10px; color: var(--muted); }
+.breadcrumb .current { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--stone); }
+.page-hero-eyebrow { font-size: 10px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.page-hero-eyebrow::after { content: ''; width: 36px; height: 1px; background: var(--gold); }
+.page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 64px); font-weight: 400; line-height: 1.1; color: var(--ivory); }
+.page-hero h1 em { font-style: italic; color: var(--gold-lt); }
+.page-hero p { font-size: 15px; font-weight: 300; color: var(--stone); line-height: 1.8; max-width: 560px; margin-top: 18px; }
+
+/* ── FILTER BAR ── */
+.filter-bar {
+  background: var(--deep); border-bottom: 1px solid var(--border);
+  padding: 0 60px;
+  display: flex; align-items: center; gap: 0;
+  position: sticky; top: 57px; z-index: 100;
+}
+.filter-btn {
+  padding: 18px 28px; background: none; border: none; border-bottom: 2px solid transparent;
+  font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 400;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone);
+  cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.filter-btn:hover { color: var(--ivory); }
+.filter-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* ── ROOMS LIST ── */
+.rooms-page { padding: 72px 60px; }
+
+/* ── ROOM DETAIL CARD ── */
+.room-detail {
+  display: grid; grid-template-columns: 1.1fr 1fr;
+  gap: 0; margin-bottom: 4px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.room-detail:hover { border-color: rgba(200,169,110,0.35); }
+.room-detail:nth-child(even) { direction: rtl; }
+.room-detail:nth-child(even) > * { direction: ltr; }
+
+.room-detail-gallery { position: relative; overflow: hidden; }
+.room-detail-gallery img {
+  width: 100%; height: 100%; min-height: 480px;
+  object-fit: cover; display: block;
+  transition: transform 0.7s ease;
+}
+.room-detail:hover .room-detail-gallery img { transform: scale(1.04); }
+.room-gallery-thumbs {
+  position: absolute; bottom: 16px; left: 16px;
+  display: flex; gap: 6px;
+}
+.room-thumb {
+  width: 52px; height: 40px; overflow: hidden;
+  border: 1px solid rgba(200,169,110,0.4); cursor: pointer; opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.room-thumb:hover { opacity: 1; }
+.room-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.room-detail-badge {
+  position: absolute; top: 18px; left: 18px;
+  background: var(--gold); color: var(--black);
+  font-size: 9px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 6px 14px;
+}
+
+.room-detail-info {
+  background: var(--deep); padding: 52px 52px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.room-detail-type { font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.room-detail-name { font-family: 'Playfair Display', serif; font-size: clamp(26px, 3vw, 36px); font-weight: 400; color: var(--ivory); margin-bottom: 18px; line-height: 1.15; }
+.room-detail-desc { font-size: 14px; color: var(--stone); line-height: 1.8; margin-bottom: 28px; }
+
+.room-specs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 28px; }
+.room-spec { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 14px 16px; text-align: center; }
+.room-spec-val { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 400; color: var(--gold-lt); line-height: 1; }
+.room-spec-key { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-top: 5px; }
+
+.room-includes { margin-bottom: 28px; }
+.room-includes h4 { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--stone); margin-bottom: 14px; }
+.room-includes-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.room-include-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--stone); }
+.room-include-item::before { content: '✓'; color: var(--gold); font-size: 11px; }
+
+.room-detail-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid var(--border); }
+.room-detail-price .from { font-size: 10px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+.room-detail-price .amount { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 400; color: var(--gold-lt); line-height: 1; }
+.room-detail-price .per { font-size: 12px; color: var(--muted); }
+.room-detail-actions { display: flex; gap: 10px; }
+.btn-book {
+  background: var(--gold); color: var(--black); border: none;
+  padding: 14px 32px; font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer; transition: all 0.25s; text-decoration: none; display: inline-block;
+}
+.btn-book:hover { background: var(--gold-lt); transform: translateY(-2px); }
+.btn-outline-sm {
+  background: none; border: 1px solid var(--border); color: var(--stone);
+  padding: 14px 22px; font-family: 'Jost', sans-serif; font-size: 11px;
+  letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: all 0.25s; text-decoration: none; display: inline-block;
+}
+.btn-outline-sm:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── CTA BAND ── */
+.cta-band { background: var(--gold); padding: 80px 60px; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+.cta-band h2 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 48px); font-weight: 400; color: var(--black); line-height: 1.15; }
+.cta-band h2 em { font-style: italic; }
+.btn-dark { background: var(--black); color: var(--gold); padding: 18px 44px; border: none; font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: all 0.25s; text-decoration: none; display: inline-block; white-space: nowrap; }
+.btn-dark:hover { background: var(--deep); transform: translateY(-2px); }
+
+/* ── FOOTER ── */
+footer { background: var(--deep); padding: 72px 60px 36px; border-top: 1px solid var(--border); }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; padding-bottom: 52px; border-bottom: 1px solid var(--border); margin-bottom: 32px; }
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 400; color: var(--ivory); margin-bottom: 18px; display: block; }
+.footer-logo span { color: var(--gold); font-style: italic; }
+.footer-desc { font-size: 13px; color: var(--muted); line-height: 1.8; margin-bottom: 28px; max-width: 260px; }
+.footer-socials { display: flex; gap: 10px; }
+.footer-social { width: 34px; height: 34px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 12px; text-decoration: none; transition: all 0.2s; }
+.footer-social:hover { border-color: var(--gold); color: var(--gold); }
+.footer-col h4 { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; font-weight: 500; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--ivory); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+.footer-copy { font-size: 11px; color: rgba(106,96,85,0.6); }
+.footer-made { font-size: 11px; color: rgba(106,96,85,0.6); }
+.footer-made a { color: var(--gold); text-decoration: none; }
+
+/* ── ANIMATIONS ── */
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  nav { padding-left: 32px; padding-right: 32px; }
+  .nav-links { gap: 22px; }
+  .page-hero { padding: 120px 32px 56px; }
+  .filter-bar { padding: 0 32px; overflow-x: auto; }
+  .rooms-page { padding: 56px 32px; }
+  .room-detail { grid-template-columns: 1fr; direction: ltr !important; }
+  .room-detail:nth-child(even) { direction: ltr; }
+  .room-detail-gallery img { min-height: 320px; }
+  .room-detail-info { padding: 36px 36px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+  .cta-band { padding: 60px 32px; }
+}
+@media (max-width: 767px) {
+  nav { padding: 14px 20px; }
+  .nav-links, .nav-book { display: none; }
+  .nav-ham { display: flex; }
+  .page-hero { padding: 100px 20px 48px; }
+  .filter-bar { top: 53px; padding: 0 16px; }
+  .filter-btn { padding: 16px 18px; font-size: 11px; }
+  .rooms-page { padding: 40px 20px; }
+  .room-detail-info { padding: 28px 22px; }
+  .room-detail-gallery img { min-height: 260px; }
+  .room-specs { grid-template-columns: repeat(3, 1fr); }
+  .room-detail-footer { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .room-detail-actions { width: 100%; }
+  .btn-book, .btn-outline-sm { flex: 1; text-align: center; }
+  footer { padding: 48px 20px 24px; }
+  .footer-top { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+  .cta-band { padding: 56px 20px; flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <a href="index.html" onclick="closeMenu()">Beranda</a>
+  <a href="rooms.html" onclick="closeMenu()">Kamar</a>
+  <a href="index.html#amenities" onclick="closeMenu()">Fasilitas</a>
+  <a href="index.html#gallery" onclick="closeMenu()">Galeri</a>
+  <a href="index.html#location" onclick="closeMenu()">Lokasi</a>
+  <a href="index.html#booking" class="mob-book" onclick="closeMenu()">Pesan Kamar</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Lumière<span> Resort</span></a>
+  <ul class="nav-links">
+    <li><a href="rooms.html" class="active">Kamar</a></li>
+    <li><a href="index.html#amenities">Fasilitas</a></li>
+    <li><a href="index.html#gallery">Galeri</a></li>
+    <li><a href="index.html#location">Lokasi</a></li>
+  </ul>
+  <a href="index.html#booking" class="nav-book">Pesan Kamar</a>
+  <button class="nav-ham" id="navHam" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Beranda</a>
+    <span>›</span>
+    <span class="current">Kamar & Villa</span>
+  </div>
+  <div class="page-hero-eyebrow">Akomodasi</div>
+  <h1>Kamar & <em>Villa</em></h1>
+  <p>Temukan akomodasi sempurna untuk setiap momen. Dari suite dengan pemandangan sawah hingga villa private dengan kolam renang pribadi di atas jurang.</p>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterRooms('all', this)">Semua</button>
+  <button class="filter-btn" onclick="filterRooms('villa', this)">Villa</button>
+  <button class="filter-btn" onclick="filterRooms('suite', this)">Suite</button>
+  <button class="filter-btn" onclick="filterRooms('honeymoon', this)">Honeymoon</button>
+  <button class="filter-btn" onclick="filterRooms('family', this)">Keluarga</button>
+</div>
+
+<!-- ROOMS LIST -->
+<section class="rooms-page">
+
+  <!-- Room 1: Jungle Pool Villa -->
+  <div class="room-detail reveal" data-category="villa">
+    <div class="room-detail-gallery">
+      <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=80" alt="Jungle Pool Villa" id="img-room1">
+      <div class="room-detail-badge">Paling Diminati</div>
+      <div class="room-gallery-thumbs">
+        <div class="room-thumb" onclick="changeImg('img-room1','https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=80')"><img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=200&q=60" alt=""></div>
+        <div class="room-thumb" onclick="changeImg('img-room1','https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=80')"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=200&q=60" alt=""></div>
+        <div class="room-thumb" onclick="changeImg('img-room1','https://images.unsplash.com/photo-1540541338287-41700207dee6?w=900&q=80')"><img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=200&q=60" alt=""></div>
+      </div>
+    </div>
+    <div class="room-detail-info">
+      <div class="room-detail-type">Villa Premium</div>
+      <div class="room-detail-name">Jungle Pool Villa</div>
+      <p class="room-detail-desc">Villa private dengan kolam renang pribadi yang menghadap langsung ke hutan tropis Ubud. Rasakan sensasi berenang di tengah alam liar dengan privasi penuh. Setiap villa dirancang terbuka dengan konsep indoor-outdoor yang menyelaraskan Anda dengan alam.</p>
+      <div class="room-specs">
+        <div class="room-spec"><div class="room-spec-val">80</div><div class="room-spec-key">m² Luas</div></div>
+        <div class="room-spec"><div class="room-spec-val">2</div><div class="room-spec-key">Tamu Maks</div></div>
+        <div class="room-spec"><div class="room-spec-val">King</div><div class="room-spec-key">Ukuran Bed</div></div>
+      </div>
+      <div class="room-includes">
+        <h4>Sudah Termasuk</h4>
+        <div class="room-includes-list">
+          <span class="room-include-item">Private Pool</span>
+          <span class="room-include-item">Sarapan Untuk 2</span>
+          <span class="room-include-item">Butler 24 Jam</span>
+          <span class="room-include-item">Welcome Drink</span>
+          <span class="room-include-item">Free Transfer Bandara</span>
+          <span class="room-include-item">Yoga Pagi</span>
+        </div>
+      </div>
+      <div class="room-detail-footer">
+        <div class="room-detail-price">
+          <div class="from">Mulai dari</div>
+          <div class="amount">Rp 4.500.000</div>
+          <div class="per">/ malam · sudah pajak</div>
+        </div>
+        <div class="room-detail-actions">
+          <a href="index.html#booking" class="btn-outline-sm">Tanya Dulu</a>
+          <a href="index.html#booking" class="btn-book">Pesan →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Room 2: Deluxe Rice Terrace Suite -->
+  <div class="room-detail reveal" data-category="suite">
+    <div class="room-detail-gallery">
+      <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=900&q=80" alt="Deluxe Rice Terrace Suite" id="img-room2">
+      <div class="room-detail-badge">Termasuk Sarapan</div>
+      <div class="room-gallery-thumbs">
+        <div class="room-thumb" onclick="changeImg('img-room2','https://images.unsplash.com/photo-1590490360182-c33d57733427?w=900&q=80')"><img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=200&q=60" alt=""></div>
+        <div class="room-thumb" onclick="changeImg('img-room2','https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=900&q=80')"><img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=200&q=60" alt=""></div>
+        <div class="room-thumb" onclick="changeImg('img-room2','https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=900&q=80')"><img src="https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=200&q=60" alt=""></div>
+      </div>
+    </div>
+    <div class="room-detail-info">
+      <div class="room-detail-type">Deluxe Suite</div>
+      <div class="room-detail-name">Deluxe Rice Terrace Suite</div>
+      <p class="room-detail-desc">Bangun pagi dengan pemandangan hamparan sawah hijau Ubud langsung dari tempat tidur Anda. Suite luas dengan teras pribadi dan kursi santai, sempurna untuk menikmati kopi pagi sambil mendengar suara alam yang menenangkan.</p>
+      <div class="room-specs">
+        <div class="room-spec"><div class="room-spec-val">55</div><div class="room-spec-key">m² Luas</div></div>
+        <div class="room-spec"><div class="room-spec-val">2</div><div class="room-spec-key">Tamu Maks</div></div>
+        <div class="room-spec"><div class="room-spec-val">King</div><div class="room-spec-key">Ukuran Bed</div></div>
+      </div>
+      <div class="room-includes">
+        <h4>Sudah Termasuk</h4>
+        <div class="room-includes-list">
+          <span class="room-include-item">Sarapan Untuk 2</span>
+          <span class="room-include-item">Teras Pribadi</span>
+          <span class="room-include-item">Akses Infinity Pool</span>
+          <span class="room-include-item">Welcome Fruit Basket</span>
+          <span class="room-include-item">Yoga Pagi</span>
+        </div>
+      </div>
+      <div class="room-detail-footer">
+        <div class="room-detail-price">
+          <div class="from">Mulai dari</div>
+          <div class="amount">Rp 2.200.000</div>
+          <div class="per">/ malam · sudah pajak</div>
+        </div>
+        <div class="room-detail-actions">
+          <a href="index.html#booking" class="btn-outline-sm">Tanya Dulu</a>
+          <a href="index.html#booking" class="btn-book">Pesan →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Room 3: Romantic Cliff Villa -->
+  <div class="room-detail reveal" data-category="villa honeymoon">
+    <div class="room-detail-gallery">
+      <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=900&q=80" alt="Romantic Cliff Villa" id="img-room3">
+      <div class="room-detail-badge">Honeymoon Special</div>
+      <div class="room-gallery-thumbs">
+        <div class="room-thumb" onclick="changeImg('img-room3','https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=900&q=80')"><img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=200&q=60" alt=""></div>
+        <div class="room-thumb" onclick="changeImg('img-room3','https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=900&q=80')"><img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=200&q=60" alt=""></div>
+        <div class="room-thumb" onclick="changeImg('img-room3','https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=900&q=80')"><img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=200&q=60" alt=""></div>
+      </div>
+    </div>
+    <div class="room-detail-info">
+      <div class="room-detail-type">Villa Eksklusif</div>
+      <div class="room-detail-name">Romantic Cliff Villa</div>
+      <p class="room-detail-desc">Villa tepi jurang yang hanya untuk pasangan. Nikmati bathtub outdoor dengan pemandangan lembah yang dramatis, meja makan candle light di tepi tebing, dan sensasi keintiman di atas alam yang menakjubkan.</p>
+      <div class="room-specs">
+        <div class="room-spec"><div class="room-spec-val">120</div><div class="room-spec-key">m² Luas</div></div>
+        <div class="room-spec"><div class="room-spec-val">2</div><div class="room-spec-key">Tamu Maks</div></div>
+        <div class="room-spec"><div class="room-spec-val">King</div><div class="room-spec-key">Ukuran Bed</div></div>
+      </div>
+      <div class="room-includes">
+        <h4>Sudah Termasuk</h4>
+        <div class="room-includes-list">
+          <span class="room-include-item">Outdoor Bathtub</span>
+          <span class="room-include-item">Candle Light Dinner</span>
+          <span class="room-include-item">Couples Spa (90 mnt)</span>
+          <span class="room-include-item">Sarapan di Kamar</span>
+          <span class="room-include-item">Butler Pribadi</span>
+          <span class="room-include-item">Rose Petal Setup</span>
+        </div>
+      </div>
+      <div class="room-detail-footer">
+        <div class="room-detail-price">
+          <div class="from">Mulai dari</div>
+          <div class="amount">Rp 6.800.000</div>
+          <div class="per">/ malam · sudah pajak</div>
+        </div>
+        <div class="room-detail-actions">
+          <a href="index.html#booking" class="btn-outline-sm">Tanya Dulu</a>
+          <a href="index.html#booking" class="btn-book">Pesan →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Room 4: Family Garden Suite -->
+  <div class="room-detail reveal" data-category="suite family">
+    <div class="room-detail-gallery">
+      <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&q=80" alt="Family Garden Suite" id="img-room4">
+      <div class="room-gallery-thumbs">
+        <div class="room-thumb" onclick="changeImg('img-room4','https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&q=80')"><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=200&q=60" alt=""></div>
+        <div class="room-thumb" onclick="changeImg('img-room4','https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=900&q=80')"><img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=200&q=60" alt=""></div>
+      </div>
+    </div>
+    <div class="room-detail-info">
+      <div class="room-detail-type">Family Suite</div>
+      <div class="room-detail-name">Family Garden Suite</div>
+      <p class="room-detail-desc">Suite dua kamar yang luas dengan taman pribadi, sempurna untuk liburan keluarga. Orang tua mendapat kamar master dengan king bed, sementara anak-anak menikmati kamar terpisah dengan twin bed yang nyaman.</p>
+      <div class="room-specs">
+        <div class="room-spec"><div class="room-spec-val">95</div><div class="room-spec-key">m² Luas</div></div>
+        <div class="room-spec"><div class="room-spec-val">4</div><div class="room-spec-key">Tamu Maks</div></div>
+        <div class="room-spec"><div class="room-spec-val">2 Bed</div><div class="room-spec-key">Kamar Tidur</div></div>
+      </div>
+      <div class="room-includes">
+        <h4>Sudah Termasuk</h4>
+        <div class="room-includes-list">
+          <span class="room-include-item">2 Kamar Tidur</span>
+          <span class="room-include-item">Taman Pribadi</span>
+          <span class="room-include-item">Sarapan Keluarga</span>
+          <span class="room-include-item">Kids Activity Kit</span>
+          <span class="room-include-item">Akses Infinity Pool</span>
+          <span class="room-include-item">Family Cooking Class</span>
+        </div>
+      </div>
+      <div class="room-detail-footer">
+        <div class="room-detail-price">
+          <div class="from">Mulai dari</div>
+          <div class="amount">Rp 3.100.000</div>
+          <div class="per">/ malam · sudah pajak</div>
+        </div>
+        <div class="room-detail-actions">
+          <a href="index.html#booking" class="btn-outline-sm">Tanya Dulu</a>
+          <a href="index.html#booking" class="btn-book">Pesan →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <h2>Belum Menemukan<br><em>yang Tepat?</em></h2>
+  <a href="index.html#booking" class="btn-dark">Hubungi Kami →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <span class="footer-logo">Lumière<span> Resort & Spa</span></span>
+      <p class="footer-desc">Surga tersembunyi di jantung Ubud. Tempat di mana alam, budaya, dan kemewahan berpadu sempurna.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social">ig</a>
+        <a href="#" class="footer-social">fb</a>
+        <a href="#" class="footer-social">tw</a>
+        <a href="#" class="footer-social">yt</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Akomodasi</h4>
+      <ul class="footer-links">
+        <li><a href="#">Jungle Pool Villa</a></li>
+        <li><a href="#">Deluxe Suite</a></li>
+        <li><a href="#">Romantic Cliff Villa</a></li>
+        <li><a href="#">Family Garden Suite</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Fasilitas</h4>
+      <ul class="footer-links">
+        <li><a href="index.html#amenities">Balinese Spa</a></li>
+        <li><a href="index.html#amenities">Infinity Pool</a></li>
+        <li><a href="index.html#amenities">Hutan Restaurant</a></li>
+        <li><a href="index.html#amenities">Yoga Pavilion</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Informasi</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="index.html#location">Lokasi</a></li>
+        <li><a href="index.html#booking">Reservasi</a></li>
+        <li><a href="#">Kontak</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2024 Lumière Resort & Spa. All rights reserved.</div>
+    <div class="footer-made">Website oleh <a href="#">AG DevCreative</a></div>
+  </div>
+</footer>
+
+<script>
+// Mobile menu
+const mobMenu = document.getElementById('mobMenu');
+const navHam  = document.getElementById('navHam');
+let open = false;
+function toggleMenu() {
+  open = !open;
+  navHam.classList.toggle('open', open);
+  if (open) { mobMenu.style.display = 'flex'; setTimeout(() => mobMenu.classList.add('open'), 10); document.body.style.overflow = 'hidden'; }
+  else { mobMenu.classList.remove('open'); setTimeout(() => mobMenu.style.display = 'none', 300); document.body.style.overflow = ''; }
+}
+function closeMenu() {
+  open = false; navHam.classList.remove('open');
+  mobMenu.classList.remove('open'); setTimeout(() => mobMenu.style.display = 'none', 300); document.body.style.overflow = '';
+}
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Filter
+function filterRooms(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.room-detail').forEach(card => {
+    if (cat === 'all' || card.dataset.category.includes(cat)) {
+      card.style.display = 'grid';
+      setTimeout(() => card.style.opacity = '1', 10);
+    } else {
+      card.style.opacity = '0';
+      setTimeout(() => card.style.display = 'none', 300);
+    }
+  });
+}
+
+// Thumbnail switcher
+function changeImg(imgId, src) {
+  document.getElementById(imgId).src = src;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,2025 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lumière Resort & Spa — Ubud, Bali</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --black: #0d0b09;
+        --deep: #151210;
+        --gold: #c8a96e;
+        --gold-lt: #e2ca9a;
+        --ivory: #f5efe4;
+        --ivory-dk: #eae0d0;
+        --stone: #9a8e7e;
+        --muted: #6b6055;
+        --border: rgba(200, 169, 110, 0.18);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Jost", sans-serif;
+        background: var(--black);
+        color: var(--ivory);
+        overflow-x: hidden;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 999;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+        opacity: 0.5;
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 500;
+        padding: 28px 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: all 0.5s ease;
+      }
+      nav.solid {
+        background: rgba(13, 11, 9, 0.92);
+        backdrop-filter: blur(20px);
+        padding: 18px 60px;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-logo {
+        font-family: "Playfair Display", serif;
+        font-size: 22px;
+        font-weight: 400;
+        color: var(--ivory);
+        text-decoration: none;
+        letter-spacing: 0.04em;
+      }
+      .nav-logo span {
+        color: var(--gold);
+        font-style: italic;
+      }
+      .nav-links {
+        display: flex;
+        gap: 40px;
+        list-style: none;
+      }
+      .nav-links a {
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--stone);
+        text-decoration: none;
+        transition: color 0.25s;
+      }
+      .nav-links a:hover {
+        color: var(--gold);
+      }
+      .nav-book {
+        background: transparent;
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        padding: 11px 28px;
+        font-family: "Jost", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.25s;
+        text-decoration: none;
+      }
+      .nav-book:hover {
+        background: var(--gold);
+        color: var(--black);
+      }
+      .nav-ham {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        z-index: 601;
+      }
+      .nav-ham span {
+        display: block;
+        width: 22px;
+        height: 1.5px;
+        background: var(--ivory);
+        transition: all 0.3s;
+      }
+      .nav-ham.open span:nth-child(1) {
+        transform: translateY(6.5px) rotate(45deg);
+      }
+      .nav-ham.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-ham.open span:nth-child(3) {
+        transform: translateY(-6.5px) rotate(-45deg);
+      }
+      .mob-menu {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 600;
+        background: var(--deep);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .mob-menu.open {
+        opacity: 1;
+      }
+      .mob-menu a {
+        font-family: "Playfair Display", serif;
+        font-size: 32px;
+        font-weight: 400;
+        color: var(--ivory);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .mob-menu a:hover {
+        color: var(--gold);
+      }
+      .mob-menu .mob-book {
+        margin-top: 8px;
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        padding: 14px 40px;
+        font-family: "Jost", sans-serif;
+        font-size: 12px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        background: none;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      /* ── HERO ── */
+      .hero {
+        position: relative;
+        height: 100vh;
+        min-height: 660px;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+      }
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        background: url("https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1600&q=85")
+          center/cover no-repeat;
+      }
+      .hero-bg::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(13, 11, 9, 0.35) 0%,
+          rgba(13, 11, 9, 0.1) 40%,
+          rgba(13, 11, 9, 0.75) 100%
+        );
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 60px 80px;
+        width: 100%;
+      }
+      .hero-eyebrow {
+        font-size: 11px;
+        font-weight: 400;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        animation: fadeUp 0.9s ease 0.2s both;
+      }
+      .hero-eyebrow::before {
+        content: "";
+        width: 48px;
+        height: 1px;
+        background: var(--gold);
+      }
+      .hero-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(48px, 7vw, 96px);
+        font-weight: 400;
+        line-height: 1;
+        color: var(--ivory);
+        margin-bottom: 28px;
+        animation: fadeUp 0.9s ease 0.4s both;
+      }
+      .hero-title em {
+        font-style: italic;
+        color: var(--gold-lt);
+        display: block;
+      }
+      .hero-sub {
+        font-size: 15px;
+        font-weight: 300;
+        color: rgba(245, 239, 228, 0.65);
+        max-width: 440px;
+        line-height: 1.7;
+        margin-bottom: 44px;
+        animation: fadeUp 0.9s ease 0.6s both;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        animation: fadeUp 0.9s ease 0.8s both;
+      }
+      .btn-gold {
+        background: var(--gold);
+        color: var(--black);
+        padding: 16px 40px;
+        border: none;
+        font-family: "Jost", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.25s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .btn-gold:hover {
+        background: var(--gold-lt);
+        transform: translateY(-2px);
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--ivory);
+        padding: 16px 40px;
+        border: 1px solid rgba(245, 239, 228, 0.3);
+        font-family: "Jost", sans-serif;
+        font-size: 11px;
+        font-weight: 400;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.25s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .btn-ghost:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+      .hero-scroll {
+        position: absolute;
+        bottom: 40px;
+        right: 60px;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        animation: fadeUp 0.9s ease 1s both;
+      }
+      .hero-scroll span {
+        font-size: 9px;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--stone);
+        writing-mode: vertical-rl;
+      }
+      .scroll-line {
+        width: 1px;
+        height: 56px;
+        background: linear-gradient(to bottom, var(--gold), transparent);
+        animation: scrollLine 2s ease infinite;
+      }
+      @keyframes scrollLine {
+        0% {
+          transform: scaleY(0);
+          transform-origin: top;
+        }
+        50% {
+          transform: scaleY(1);
+          transform-origin: top;
+        }
+        51% {
+          transform: scaleY(1);
+          transform-origin: bottom;
+        }
+        100% {
+          transform: scaleY(0);
+          transform-origin: bottom;
+        }
+      }
+      .hero-badges {
+        position: absolute;
+        top: 50%;
+        right: 60px;
+        transform: translateY(-50%);
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        animation: fadeUp 0.9s ease 1.2s both;
+      }
+      .badge {
+        background: rgba(13, 11, 9, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--border);
+        padding: 16px 22px;
+        text-align: center;
+      }
+      .badge-num {
+        font-family: "Playfair Display", serif;
+        font-size: 28px;
+        font-weight: 400;
+        color: var(--gold);
+        line-height: 1;
+      }
+      .badge-lbl {
+        font-size: 9px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--stone);
+        margin-top: 4px;
+      }
+
+      /* ── BOOKING SECTION (REDESIGNED) ── */
+      .booking-section {
+        background: var(--deep);
+        padding: 56px 60px;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+      }
+      .booking-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse at 60% 50%,
+          rgba(200, 169, 110, 0.07) 0%,
+          transparent 65%
+        );
+        pointer-events: none;
+      }
+      .booking-section-inner {
+        display: grid;
+        grid-template-columns: 1fr 2.2fr;
+        gap: 64px;
+        align-items: center;
+        position: relative;
+      }
+      .booking-headline {
+      }
+      .booking-headline .sec-eyebrow {
+        margin-bottom: 14px;
+      }
+      .booking-headline h2 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(26px, 3vw, 40px);
+        font-weight: 400;
+        line-height: 1.15;
+        color: var(--ivory);
+      }
+      .booking-headline h2 em {
+        font-style: italic;
+        color: var(--gold-lt);
+      }
+      .booking-headline p {
+        font-size: 13px;
+        color: var(--stone);
+        margin-top: 12px;
+        line-height: 1.7;
+      }
+      .booking-form-wrap {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border);
+        padding: 36px 40px;
+      }
+      .booking-form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 0;
+        margin-bottom: 28px;
+      }
+      .booking-field {
+        padding: 18px 22px;
+        border-right: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        transition: background 0.2s;
+      }
+      .booking-field:last-child {
+        border-right: none;
+      }
+      .booking-field:hover {
+        background: rgba(200, 169, 110, 0.04);
+      }
+      .booking-label {
+        font-size: 9px;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 500;
+      }
+      .booking-input {
+        background: none;
+        border: none;
+        outline: none;
+        font-family: "Jost", sans-serif;
+        font-size: 15px;
+        font-weight: 300;
+        color: var(--ivory);
+        width: 100%;
+      }
+      .booking-input::placeholder {
+        color: var(--muted);
+      }
+      .booking-input option {
+        background: var(--deep);
+      }
+      .booking-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 4px;
+      }
+      .booking-note {
+        font-size: 12px;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .booking-note::before {
+        content: "✓";
+        color: var(--gold);
+        font-size: 12px;
+      }
+      .booking-submit {
+        background: var(--gold);
+        color: var(--black);
+        border: none;
+        padding: 16px 44px;
+        font-family: "Jost", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.25s;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .booking-submit:hover {
+        background: var(--gold-lt);
+        transform: translateY(-2px);
+      }
+      .booking-submit svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      /* ── SECTION BASE ── */
+      .sec {
+        padding: 100px 60px;
+      }
+      .sec-eyebrow {
+        font-size: 10px;
+        font-weight: 400;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--gold);
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+      .sec-eyebrow::after {
+        content: "";
+        width: 36px;
+        height: 1px;
+        background: var(--gold);
+      }
+      .sec-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(32px, 4vw, 52px);
+        font-weight: 400;
+        line-height: 1.15;
+        color: var(--ivory);
+        margin-bottom: 20px;
+      }
+      .sec-title em {
+        font-style: italic;
+        color: var(--gold-lt);
+      }
+      .sec-body {
+        font-size: 15px;
+        font-weight: 300;
+        color: var(--stone);
+        line-height: 1.8;
+        max-width: 520px;
+      }
+
+      /* ── ABOUT ── */
+      .about {
+        background: var(--deep);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 600px;
+      }
+      .about-img {
+        position: relative;
+        overflow: hidden;
+      }
+      .about-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+      }
+      .about:hover .about-img img {
+        transform: scale(1.04);
+      }
+      .about-img-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(13, 11, 9, 0.2), transparent);
+      }
+      .about-content {
+        padding: 80px 72px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .about-divider {
+        width: 48px;
+        height: 1px;
+        background: var(--border);
+        margin: 28px 0;
+      }
+      .about-features {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-top: 36px;
+      }
+      .about-feat {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+      }
+      .feat-icon {
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--border);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+      }
+      .feat-text h4 {
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        color: var(--ivory);
+        margin-bottom: 5px;
+      }
+      .feat-text p {
+        font-size: 13px;
+        color: var(--stone);
+        line-height: 1.6;
+      }
+
+      /* ── ROOMS (CARD STYLE) ── */
+      .rooms {
+        background: var(--black);
+      }
+      .rooms-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 56px;
+      }
+      .rooms-cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+      .room-card {
+        background: var(--deep);
+        border: 1px solid var(--border);
+        overflow: hidden;
+        transition: all 0.35s ease;
+        display: flex;
+        flex-direction: column;
+      }
+      .room-card:hover {
+        border-color: rgba(200, 169, 110, 0.4);
+        transform: translateY(-6px);
+        box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+      }
+      .room-card-img {
+        aspect-ratio: 4/3;
+        overflow: hidden;
+        position: relative;
+      }
+      .room-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+        display: block;
+      }
+      .room-card:hover .room-card-img img {
+        transform: scale(1.07);
+      }
+      .room-card-badge {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        background: var(--gold);
+        color: var(--black);
+        font-size: 9px;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        padding: 5px 12px;
+      }
+      .room-card-body {
+        padding: 24px 24px 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .room-card-type {
+        font-size: 9px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 8px;
+      }
+      .room-card-name {
+        font-family: "Playfair Display", serif;
+        font-size: 20px;
+        font-weight: 400;
+        color: var(--ivory);
+        margin-bottom: 12px;
+        line-height: 1.2;
+      }
+      .room-card-desc {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.6;
+        margin-bottom: 18px;
+        flex: 1;
+      }
+      .room-card-amenities {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+      .room-amen-tag {
+        font-size: 10px;
+        color: var(--stone);
+        border: 1px solid var(--border);
+        padding: 4px 10px;
+        letter-spacing: 0.08em;
+      }
+      .room-card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 18px;
+        border-top: 1px solid var(--border);
+      }
+      .room-card-price {
+      }
+      .room-card-price .from {
+        font-size: 10px;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .room-card-price .amount {
+        font-family: "Playfair Display", serif;
+        font-size: 22px;
+        font-weight: 400;
+        color: var(--gold-lt);
+        line-height: 1;
+      }
+      .room-card-price .per {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .room-card-btn {
+        background: none;
+        border: 1px solid var(--border);
+        color: var(--stone);
+        padding: 9px 18px;
+        font-family: "Jost", sans-serif;
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.25s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .room-card:hover .room-card-btn {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+
+      /* ── AMENITIES ── */
+      .amenities {
+        background: var(--deep);
+      }
+      .amen-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2px;
+        margin-top: 64px;
+      }
+      .amen-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--border);
+        padding: 44px 32px;
+        text-align: center;
+        transition: all 0.35s;
+        position: relative;
+        overflow: hidden;
+      }
+      .amen-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(200, 169, 110, 0.06),
+          transparent
+        );
+        opacity: 0;
+        transition: opacity 0.35s;
+      }
+      .amen-card:hover {
+        border-color: rgba(200, 169, 110, 0.4);
+      }
+      .amen-card:hover::before {
+        opacity: 1;
+      }
+      .amen-icon {
+        font-size: 36px;
+        margin-bottom: 20px;
+        display: block;
+      }
+      .amen-name {
+        font-family: "Playfair Display", serif;
+        font-size: 20px;
+        font-weight: 400;
+        color: var(--ivory);
+        margin-bottom: 12px;
+      }
+      .amen-desc {
+        font-size: 14px;
+        color: var(--stone);
+        line-height: 1.7;
+      }
+
+      /* ── GALLERY ── */
+      .gallery {
+        background: var(--black);
+        padding: 100px 0;
+      }
+      .gallery-header {
+        padding: 0 60px 52px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 260px 260px;
+        gap: 3px;
+      }
+      .gal-item {
+        overflow: hidden;
+        position: relative;
+      }
+      .gal-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.7s ease;
+        display: block;
+      }
+      .gal-item:hover img {
+        transform: scale(1.07);
+      }
+      .gal-item:nth-child(1) {
+        grid-column: span 2;
+      }
+      .gal-item:nth-child(4) {
+        grid-column: span 2;
+      }
+      .gal-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(13, 11, 9, 0.35);
+        opacity: 0;
+        transition: opacity 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .gal-item:hover .gal-overlay {
+        opacity: 1;
+      }
+      .gal-plus {
+        width: 48px;
+        height: 48px;
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+      }
+
+      /* ── TESTIMONIALS ── */
+      .testi {
+        background: var(--deep);
+      }
+      .testi-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        margin-top: 56px;
+      }
+      .testi-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--border);
+        padding: 44px 36px;
+        transition: border-color 0.3s;
+      }
+      .testi-card:hover {
+        border-color: rgba(200, 169, 110, 0.3);
+      }
+      .testi-stars {
+        color: var(--gold);
+        font-size: 12px;
+        letter-spacing: 3px;
+        margin-bottom: 20px;
+      }
+      .testi-quote {
+        font-family: "Playfair Display", serif;
+        font-size: 18px;
+        font-style: italic;
+        font-weight: 400;
+        color: var(--ivory-dk);
+        line-height: 1.7;
+        margin-bottom: 28px;
+      }
+      .testi-sep {
+        width: 32px;
+        height: 1px;
+        background: var(--border);
+        margin-bottom: 20px;
+      }
+      .testi-name {
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        color: var(--ivory);
+        margin-bottom: 4px;
+      }
+      .testi-origin {
+        font-size: 11px;
+        color: var(--muted);
+        letter-spacing: 0.06em;
+      }
+
+      /* ── LOCATION ── */
+      .location {
+        background: var(--black);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 560px;
+      }
+      .loc-map {
+        background: url("https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80")
+          center/cover;
+        position: relative;
+      }
+      .loc-map::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(13, 11, 9, 0.3);
+      }
+      .loc-pin {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        text-align: center;
+      }
+      .loc-pin-dot {
+        width: 16px;
+        height: 16px;
+        background: var(--gold);
+        border-radius: 50%;
+        margin: 0 auto 8px;
+        box-shadow: 0 0 0 6px rgba(200, 169, 110, 0.25);
+      }
+      .loc-pin-label {
+        background: var(--deep);
+        border: 1px solid var(--border);
+        padding: 10px 18px;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ivory);
+        white-space: nowrap;
+      }
+      .loc-content {
+        padding: 80px 72px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: var(--deep);
+      }
+      .loc-details {
+        margin-top: 36px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .loc-item {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+      }
+      .loc-icon {
+        font-size: 18px;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .loc-item-title {
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 4px;
+      }
+      .loc-item-text {
+        font-size: 14px;
+        color: var(--stone);
+        line-height: 1.6;
+      }
+
+      /* ── CTA BAND ── */
+      .cta-band {
+        background: var(--gold);
+        padding: 80px 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+        flex-wrap: wrap;
+      }
+      .cta-band h2 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(28px, 4vw, 48px);
+        font-weight: 400;
+        color: var(--black);
+        line-height: 1.15;
+      }
+      .cta-band h2 em {
+        font-style: italic;
+      }
+      .btn-dark {
+        background: var(--black);
+        color: var(--gold);
+        padding: 18px 44px;
+        border: none;
+        font-family: "Jost", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.25s;
+        text-decoration: none;
+        display: inline-block;
+        white-space: nowrap;
+      }
+      .btn-dark:hover {
+        background: var(--deep);
+        transform: translateY(-2px);
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        background: var(--deep);
+        padding: 72px 60px 36px;
+        border-top: 1px solid var(--border);
+      }
+      .footer-top {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 56px;
+        padding-bottom: 52px;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 32px;
+      }
+      .footer-logo {
+        font-family: "Playfair Display", serif;
+        font-size: 24px;
+        font-weight: 400;
+        color: var(--ivory);
+        margin-bottom: 18px;
+        display: block;
+      }
+      .footer-logo span {
+        color: var(--gold);
+        font-style: italic;
+      }
+      .footer-desc {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.8;
+        margin-bottom: 28px;
+        max-width: 260px;
+      }
+      .footer-socials {
+        display: flex;
+        gap: 10px;
+      }
+      .footer-social {
+        width: 34px;
+        height: 34px;
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+        font-size: 12px;
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+      .footer-social:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+      .footer-col h4 {
+        font-size: 10px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 20px;
+        font-weight: 500;
+      }
+      .footer-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .footer-links a {
+        font-size: 13px;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--ivory);
+      }
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .footer-copy {
+        font-size: 11px;
+        color: rgba(106, 96, 85, 0.6);
+      }
+      .footer-made {
+        font-size: 11px;
+        color: rgba(106, 96, 85, 0.6);
+      }
+      .footer-made a {
+        color: var(--gold);
+        text-decoration: none;
+      }
+      .footer-made a:hover {
+        color: var(--gold-lt);
+      }
+
+      /* ── ANIMATIONS ── */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(28px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 1200px) {
+        .rooms-cards {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 1024px) {
+        nav,
+        nav.solid {
+          padding-left: 32px;
+          padding-right: 32px;
+        }
+        .nav-links {
+          gap: 24px;
+        }
+        .hero-content {
+          padding: 0 32px 60px;
+        }
+        .hero-badges {
+          right: 32px;
+        }
+        .hero-scroll {
+          right: 32px;
+        }
+        .booking-section {
+          padding: 48px 32px;
+        }
+        .booking-section-inner {
+          grid-template-columns: 1fr;
+          gap: 36px;
+        }
+        .booking-form-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .booking-field:nth-child(2) {
+          border-right: none;
+        }
+        .booking-field:nth-child(3) {
+          border-right: 1px solid var(--border);
+        }
+        .booking-field:nth-child(3),
+        .booking-field:nth-child(4) {
+          border-bottom: none;
+        }
+        .sec {
+          padding: 72px 32px;
+        }
+        .about {
+          grid-template-columns: 1fr;
+        }
+        .about-img {
+          min-height: 360px;
+        }
+        .about-content {
+          padding: 56px 40px;
+        }
+        .amen-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .gallery-header {
+          padding: 0 32px 40px;
+        }
+        .gallery-grid {
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: repeat(3, 220px);
+        }
+        .gal-item:nth-child(1) {
+          grid-column: span 2;
+        }
+        .gal-item:nth-child(4) {
+          grid-column: auto;
+        }
+        .testi-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .location {
+          grid-template-columns: 1fr;
+        }
+        .loc-map {
+          min-height: 360px;
+        }
+        .loc-content {
+          padding: 56px 40px;
+        }
+        .footer-top {
+          grid-template-columns: 1fr 1fr;
+          gap: 36px;
+        }
+      }
+      @media (max-width: 767px) {
+        nav {
+          padding: 16px 20px;
+        }
+        nav.solid {
+          padding: 13px 20px;
+        }
+        .nav-links,
+        .nav-book {
+          display: none;
+        }
+        .nav-ham {
+          display: flex;
+        }
+        .hero-content {
+          padding: 0 22px 52px;
+        }
+        .hero-badges {
+          display: none;
+        }
+        .hero-title {
+          font-size: clamp(38px, 10vw, 56px);
+        }
+        .hero-actions {
+          flex-direction: column;
+        }
+        .hero-actions a {
+          text-align: center;
+        }
+        .booking-section {
+          padding: 40px 20px;
+        }
+        .booking-form-grid {
+          grid-template-columns: 1fr;
+        }
+        .booking-field {
+          border-right: none;
+        }
+        .booking-footer {
+          flex-direction: column;
+          gap: 16px;
+          align-items: stretch;
+        }
+        .booking-submit {
+          justify-content: center;
+        }
+        .sec {
+          padding: 56px 20px;
+        }
+        .about-content {
+          padding: 40px 22px;
+        }
+        .about-features {
+          grid-template-columns: 1fr;
+        }
+        .rooms-cards {
+          grid-template-columns: 1fr;
+        }
+        .amen-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .amen-card {
+          padding: 32px 20px;
+        }
+        .gallery-grid {
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: repeat(3, 160px);
+        }
+        .gallery-header {
+          padding: 0 20px 32px;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 16px;
+        }
+        .testi-grid {
+          grid-template-columns: 1fr;
+        }
+        .location {
+          grid-template-columns: 1fr;
+        }
+        .loc-map {
+          min-height: 280px;
+        }
+        .loc-content {
+          padding: 40px 22px;
+        }
+        .cta-band {
+          padding: 60px 22px;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        footer {
+          padding: 52px 20px 28px;
+        }
+        .footer-top {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .hero-scroll {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- MOBILE MENU -->
+    <div class="mob-menu" id="mobMenu">
+      <a href="#rooms" onclick="closeMenu()">Kamar</a>
+      <a href="#amenities" onclick="closeMenu()">Fasilitas</a>
+      <a href="#gallery" onclick="closeMenu()">Galeri</a>
+      <a href="#location" onclick="closeMenu()">Lokasi</a>
+      <a href="#booking" class="mob-book" onclick="closeMenu()">Pesan Kamar</a>
+    </div>
+
+    <!-- NAV -->
+    <nav id="navbar">
+      <a href="#" class="nav-logo">Lumière<span> Resort</span></a>
+      <ul class="nav-links">
+        <li><a href="#rooms">Kamar</a></li>
+        <li><a href="#amenities">Fasilitas</a></li>
+        <li><a href="#gallery">Galeri</a></li>
+        <li><a href="#location">Lokasi</a></li>
+      </ul>
+      <a href="#booking" class="nav-book">Pesan Kamar</a>
+      <button
+        class="nav-ham"
+        id="navHam"
+        onclick="toggleMenu()"
+        aria-label="Menu"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-bg"></div>
+      <div class="hero-badges">
+        <div class="badge">
+          <div class="badge-num">5★</div>
+          <div class="badge-lbl">Rating</div>
+        </div>
+        <div class="badge">
+          <div class="badge-num">48</div>
+          <div class="badge-lbl">Suite</div>
+        </div>
+        <div class="badge">
+          <div class="badge-num">12</div>
+          <div class="badge-lbl">Villa</div>
+        </div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Ubud, Bali — Sejak 2010</div>
+        <h1 class="hero-title">Where Jungle<em>Meets Luxury.</em></h1>
+        <p class="hero-sub">
+          Rasakan ketenangan alam Ubud yang autentik dalam balutan kemewahan tak
+          tertandingi. Setiap momen di Lumière adalah kenangan seumur hidup.
+        </p>
+        <div class="hero-actions">
+          <a href="#booking" class="btn-gold">Pesan Sekarang</a>
+          <a href="#rooms" class="btn-ghost">Lihat Kamar</a>
+        </div>
+      </div>
+      <div class="hero-scroll">
+        <div class="scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+    </section>
+
+    <!-- BOOKING SECTION (REDESIGNED) -->
+    <div class="booking-section" id="booking">
+      <div class="booking-section-inner">
+        <div class="booking-headline">
+          <div class="sec-eyebrow">Reservasi</div>
+          <h2>Pesan Kamar<br /><em>Impian Anda</em></h2>
+          <p>
+            Dapatkan harga terbaik dengan memesan langsung. Pembatalan gratis
+            hingga 24 jam sebelum check-in.
+          </p>
+        </div>
+        <div class="booking-form-wrap">
+          <div class="booking-form-grid">
+            <div class="booking-field">
+              <div class="booking-label">Check In</div>
+              <input type="date" class="booking-input" />
+            </div>
+            <div class="booking-field">
+              <div class="booking-label">Check Out</div>
+              <input type="date" class="booking-input" />
+            </div>
+            <div class="booking-field">
+              <div class="booking-label">Tamu</div>
+              <select class="booking-input">
+                <option>1 Tamu</option>
+                <option>2 Tamu</option>
+                <option>3 Tamu</option>
+                <option>4+ Tamu</option>
+              </select>
+            </div>
+            <div class="booking-field">
+              <div class="booking-label">Tipe Kamar</div>
+              <select class="booking-input">
+                <option>Semua Tipe</option>
+                <option>Deluxe Suite</option>
+                <option>Pool Villa</option>
+                <option>Jungle Villa</option>
+              </select>
+            </div>
+          </div>
+          <div class="booking-footer">
+            <div class="booking-note">
+              Harga sudah termasuk sarapan untuk 2 orang
+            </div>
+            <button
+              class="booking-submit"
+              onclick="alert('Fitur booking terhubung ke sistem reservasi.')"
+            >
+              Cek Ketersediaan
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <div class="about-img">
+        <img
+          src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=900&q=80"
+          alt="Resort"
+        />
+        <div class="about-img-overlay"></div>
+      </div>
+      <div class="about-content reveal">
+        <div class="sec-eyebrow">Tentang Kami</div>
+        <h2 class="sec-title">
+          Surga Tersembunyi<br />di <em>Jantung Ubud</em>
+        </h2>
+        <div class="about-divider"></div>
+        <p class="sec-body">
+          Lumière Resort & Spa berdiri di atas lahan 4 hektar di tengah hutan
+          tropis Ubud. Setiap villa dan suite dirancang untuk menyelaraskan Anda
+          dengan alam, sambil menikmati kemewahan layanan bintang lima yang
+          personal.
+        </p>
+        <div class="about-features">
+          <div class="about-feat">
+            <div class="feat-icon">🌿</div>
+            <div class="feat-text">
+              <h4>Alam Autentik</h4>
+              <p>Dikelilingi sawah & hutan tropis Ubud yang asri</p>
+            </div>
+          </div>
+          <div class="about-feat">
+            <div class="feat-icon">🧖</div>
+            <div class="feat-text">
+              <h4>Spa Premium</h4>
+              <p>Ritual kecantikan tradisional Bali yang memanjakan</p>
+            </div>
+          </div>
+          <div class="about-feat">
+            <div class="feat-icon">🍽️</div>
+            <div class="feat-text">
+              <h4>Fine Dining</h4>
+              <p>Masakan lokal & internasional dari chef berbintang</p>
+            </div>
+          </div>
+          <div class="about-feat">
+            <div class="feat-icon">🏊</div>
+            <div class="feat-text">
+              <h4>Infinity Pool</h4>
+              <p>Pemandangan lembah Ubud yang tak terlupakan</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROOMS (CARD STYLE) -->
+    <section class="sec rooms" id="rooms">
+      <div class="rooms-header reveal">
+        <div>
+          <div class="sec-eyebrow">Akomodasi</div>
+          <h2 class="sec-title">Kamar & <em>Villa</em></h2>
+        </div>
+        <a href="rooms.html" class="btn-ghost">Lihat Semua Kamar</a>
+      </div>
+      <div class="rooms-cards reveal">
+        <div class="room-card">
+          <div class="room-card-img">
+            <img
+              src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=700&q=80"
+              alt="Jungle Pool Villa"
+            />
+            <div class="room-card-badge">Paling Diminati</div>
+          </div>
+          <div class="room-card-body">
+            <div class="room-card-type">Villa</div>
+            <div class="room-card-name">Jungle Pool Villa</div>
+            <p class="room-card-desc">
+              Villa private dengan kolam renang pribadi menghadap hutan tropis.
+              Pengalaman menginap paling ikonik di Lumière.
+            </p>
+            <div class="room-card-amenities">
+              <span class="room-amen-tag">Private Pool</span>
+              <span class="room-amen-tag">King Bed</span>
+              <span class="room-amen-tag">80 m²</span>
+            </div>
+            <div class="room-card-footer">
+              <div class="room-card-price">
+                <div class="from">Mulai dari</div>
+                <div class="amount">Rp 4.500.000</div>
+                <div class="per">/ malam</div>
+              </div>
+              <a href="rooms.html" class="room-card-btn">Detail →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="room-card">
+          <div class="room-card-img">
+            <img
+              src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=700&q=80"
+              alt="Deluxe Suite"
+            />
+            <div class="room-card-badge">Termasuk Sarapan</div>
+          </div>
+          <div class="room-card-body">
+            <div class="room-card-type">Suite</div>
+            <div class="room-card-name">Deluxe Rice Terrace Suite</div>
+            <p class="room-card-desc">
+              Suite luas dengan teras langsung menghadap hamparan sawah. Bangun
+              pagi dengan pemandangan hijau yang menyegarkan.
+            </p>
+            <div class="room-card-amenities">
+              <span class="room-amen-tag">Sawah View</span>
+              <span class="room-amen-tag">Sarapan</span>
+              <span class="room-amen-tag">55 m²</span>
+            </div>
+            <div class="room-card-footer">
+              <div class="room-card-price">
+                <div class="from">Mulai dari</div>
+                <div class="amount">Rp 2.200.000</div>
+                <div class="per">/ malam</div>
+              </div>
+              <a href="rooms.html" class="room-card-btn">Detail →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="room-card">
+          <div class="room-card-img">
+            <img
+              src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=700&q=80"
+              alt="Romantic Cliff Villa"
+            />
+            <div class="room-card-badge">Honeymoon Special</div>
+          </div>
+          <div class="room-card-body">
+            <div class="room-card-type">Villa</div>
+            <div class="room-card-name">Romantic Cliff Villa</div>
+            <p class="room-card-desc">
+              Villa tepi tebing eksklusif untuk pasangan. Dilengkapi bathtub
+              outdoor dan meja makan privat di atas jurang.
+            </p>
+            <div class="room-card-amenities">
+              <span class="room-amen-tag">Cliff View</span>
+              <span class="room-amen-tag">Outdoor Bath</span>
+              <span class="room-amen-tag">120 m²</span>
+            </div>
+            <div class="room-card-footer">
+              <div class="room-card-price">
+                <div class="from">Mulai dari</div>
+                <div class="amount">Rp 6.800.000</div>
+                <div class="per">/ malam</div>
+              </div>
+              <a href="rooms.html" class="room-card-btn">Detail →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="room-card">
+          <div class="room-card-img">
+            <img
+              src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=700&q=80"
+              alt="Family Suite"
+            />
+          </div>
+          <div class="room-card-body">
+            <div class="room-card-type">Suite</div>
+            <div class="room-card-name">Family Garden Suite</div>
+            <p class="room-card-desc">
+              Suite dua kamar yang luas dengan taman pribadi. Ideal untuk
+              keluarga yang ingin menikmati kenyamanan dan privasi.
+            </p>
+            <div class="room-card-amenities">
+              <span class="room-amen-tag">2 Kamar</span>
+              <span class="room-amen-tag">Garden View</span>
+              <span class="room-amen-tag">95 m²</span>
+            </div>
+            <div class="room-card-footer">
+              <div class="room-card-price">
+                <div class="from">Mulai dari</div>
+                <div class="amount">Rp 3.100.000</div>
+                <div class="per">/ malam</div>
+              </div>
+              <a href="rooms.html" class="room-card-btn">Detail →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AMENITIES -->
+    <section class="sec amenities" id="amenities">
+      <div class="reveal" style="text-align: center">
+        <div class="sec-eyebrow" style="justify-content: center">Fasilitas</div>
+        <h2 class="sec-title">Pengalaman <em>Tak Terlupakan</em></h2>
+        <p class="sec-body" style="margin: 0 auto; text-align: center">
+          Setiap fasilitas dirancang untuk memanjakan setiap indra Anda selama
+          menginap.
+        </p>
+      </div>
+      <div class="amen-grid reveal">
+        <div class="amen-card">
+          <span class="amen-icon">♨️</span>
+          <div class="amen-name">Balinese Spa</div>
+          <p class="amen-desc">
+            Pijat tradisional, lulur, dan ritual kecantikan khas Bali dengan
+            bahan alami pilihan.
+          </p>
+        </div>
+        <div class="amen-card">
+          <span class="amen-icon">🏊</span>
+          <div class="amen-name">Infinity Pool</div>
+          <p class="amen-desc">
+            Kolam renang tak bertepi menghadap lembah Ubud yang hijau dan
+            mengagumkan.
+          </p>
+        </div>
+        <div class="amen-card">
+          <span class="amen-icon">🍽️</span>
+          <div class="amen-name">Hutan Restaurant</div>
+          <p class="amen-desc">
+            Sajian fine dining dengan perpaduan masakan Bali autentik dan
+            hidangan internasional.
+          </p>
+        </div>
+        <div class="amen-card">
+          <span class="amen-icon">🧘</span>
+          <div class="amen-name">Yoga Pavilion</div>
+          <p class="amen-desc">
+            Sesi yoga dan meditasi harian dengan instruktur bersertifikat di
+            tengah alam terbuka.
+          </p>
+        </div>
+        <div class="amen-card">
+          <span class="amen-icon">🎭</span>
+          <div class="amen-name">Kecak Performance</div>
+          <p class="amen-desc">
+            Pertunjukan tari Kecak eksklusif setiap malam untuk tamu resort.
+          </p>
+        </div>
+        <div class="amen-card">
+          <span class="amen-icon">🚁</span>
+          <div class="amen-name">Helicopter Transfer</div>
+          <p class="amen-desc">
+            Layanan transfer helikopter dari Ngurah Rai langsung ke resort untuk
+            tamu VIP.
+          </p>
+        </div>
+        <div class="amen-card">
+          <span class="amen-icon">🌄</span>
+          <div class="amen-name">Sunrise Trekking</div>
+          <p class="amen-desc">
+            Panduan trekking eksklusif ke Gunung Batur untuk menyaksikan
+            matahari terbit.
+          </p>
+        </div>
+        <div class="amen-card">
+          <span class="amen-icon">🍸</span>
+          <div class="amen-name">Jungle Bar</div>
+          <p class="amen-desc">
+            Cocktail bar tematik di atas pohon dengan pemandangan kanopi hutan
+            tropis Ubud.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery" id="gallery">
+      <div class="gallery-header reveal">
+        <div>
+          <div class="sec-eyebrow">Galeri</div>
+          <h2 class="sec-title">Sekilas <em>Lumière</em></h2>
+        </div>
+        <a href="#booking" class="btn-ghost">Pesan Sekarang</a>
+      </div>
+      <div class="gallery-grid">
+        <div class="gal-item">
+          <img
+            src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=80"
+            alt="Pool"
+          />
+          <div class="gal-overlay"><div class="gal-plus">+</div></div>
+        </div>
+        <div class="gal-item">
+          <img
+            src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&q=80"
+            alt="Suite"
+          />
+          <div class="gal-overlay"><div class="gal-plus">+</div></div>
+        </div>
+        <div class="gal-item">
+          <img
+            src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=600&q=80"
+            alt="Spa"
+          />
+          <div class="gal-overlay"><div class="gal-plus">+</div></div>
+        </div>
+        <div class="gal-item">
+          <img
+            src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80"
+            alt="Dining"
+          />
+          <div class="gal-overlay"><div class="gal-plus">+</div></div>
+        </div>
+        <div class="gal-item">
+          <img
+            src="https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=600&q=80"
+            alt="Villa"
+          />
+          <div class="gal-overlay"><div class="gal-plus">+</div></div>
+        </div>
+        <div class="gal-item">
+          <img
+            src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=900&q=80"
+            alt="Resort"
+          />
+          <div class="gal-overlay"><div class="gal-plus">+</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="sec testi" id="testimonials">
+      <div class="reveal">
+        <div class="sec-eyebrow">Ulasan Tamu</div>
+        <h2 class="sec-title">Apa Kata <em>Mereka</em></h2>
+      </div>
+      <div class="testi-grid reveal">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">
+            "Pengalaman menginap terbaik dalam hidup kami. Villa dengan private
+            pool menghadap sawah, pelayanan yang sangat personal, dan makanan
+            yang luar biasa."
+          </p>
+          <div class="testi-sep"></div>
+          <div class="testi-name">James & Sophie Laurent</div>
+          <div class="testi-origin">Paris, France — Jungle Pool Villa</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">
+            "Spa treatment-nya sungguh luar biasa. Sesi Balinese massage selama
+            3 jam membuat kami benar-benar merasakan jiwa pulau ini. Pasti akan
+            kembali!"
+          </p>
+          <div class="testi-sep"></div>
+          <div class="testi-name">Yuki Tanaka</div>
+          <div class="testi-origin">Tokyo, Japan — Deluxe Suite</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">
+            "Honeymoon kami di Cliff Villa adalah momen yang tidak akan pernah
+            terlupakan. Sarapan di atas tebing dengan pemandangan hutan...
+            sempurna."
+          </p>
+          <div class="testi-sep"></div>
+          <div class="testi-name">Bram & Anisa Wijaya</div>
+          <div class="testi-origin">
+            Jakarta, Indonesia — Romantic Cliff Villa
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOCATION -->
+    <section class="location" id="location">
+      <div class="loc-map">
+        <div class="loc-pin">
+          <div class="loc-pin-dot"></div>
+          <div class="loc-pin-label">Lumière Resort & Spa</div>
+        </div>
+      </div>
+      <div class="loc-content reveal">
+        <div class="sec-eyebrow">Lokasi</div>
+        <h2 class="sec-title">Mudah <em>Dijangkau</em></h2>
+        <p class="sec-body">
+          Terletak di jantung Ubud, dikelilingi hutan tropis dan hamparan sawah
+          yang memesona.
+        </p>
+        <div class="loc-details">
+          <div class="loc-item">
+            <div class="loc-icon">📍</div>
+            <div>
+              <div class="loc-item-title">Alamat</div>
+              <div class="loc-item-text">
+                Jl. Raya Ubud No. 88, Ubud, Gianyar, Bali 80571
+              </div>
+            </div>
+          </div>
+          <div class="loc-item">
+            <div class="loc-icon">✈️</div>
+            <div>
+              <div class="loc-item-title">Dari Bandara Ngurah Rai</div>
+              <div class="loc-item-text">
+                ±75 menit via jalan tol Bali Mandara. Layanan transfer tersedia
+                24 jam.
+              </div>
+            </div>
+          </div>
+          <div class="loc-item">
+            <div class="loc-icon">📞</div>
+            <div>
+              <div class="loc-item-title">Reservasi & Informasi</div>
+              <div class="loc-item-text">
+                +62 361 975 888<br />reservation@lumiere-bali.com
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <div class="cta-band reveal">
+      <h2>Siap Merasakan<br /><em>Kemewahan Ubud?</em></h2>
+      <a href="#booking" class="btn-dark">Pesan Kamar Anda →</a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-top">
+        <div>
+          <span class="footer-logo">Lumière<span> Resort & Spa</span></span>
+          <p class="footer-desc">
+            Surga tersembunyi di jantung Ubud. Tempat di mana alam, budaya, dan
+            kemewahan berpadu sempurna.
+          </p>
+          <div class="footer-socials">
+            <a href="#" class="footer-social">ig</a>
+            <a href="#" class="footer-social">fb</a>
+            <a href="#" class="footer-social">tw</a>
+            <a href="#" class="footer-social">yt</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Akomodasi</h4>
+          <ul class="footer-links">
+            <li><a href="rooms.html">Jungle Pool Villa</a></li>
+            <li><a href="rooms.html">Deluxe Suite</a></li>
+            <li><a href="rooms.html">Romantic Cliff Villa</a></li>
+            <li><a href="rooms.html">Family Garden Suite</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Fasilitas</h4>
+          <ul class="footer-links">
+            <li><a href="#">Balinese Spa</a></li>
+            <li><a href="#">Infinity Pool</a></li>
+            <li><a href="#">Hutan Restaurant</a></li>
+            <li><a href="#">Yoga Pavilion</a></li>
+            <li><a href="#">Jungle Bar</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Informasi</h4>
+          <ul class="footer-links">
+            <li><a href="#">Tentang Kami</a></li>
+            <li><a href="#">Kebijakan Reservasi</a></li>
+            <li><a href="#">Paket Honeymoon</a></li>
+            <li><a href="#">MICE & Events</a></li>
+            <li><a href="#">Kontak</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © 2024 Lumière Resort & Spa. All rights reserved.
+        </div>
+        <div class="footer-made">
+          Website oleh <a href="https://supervand.wuaze.com/">AG DevCreative</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () =>
+        navbar.classList.toggle("solid", window.scrollY > 80),
+      );
+
+      const mobMenu = document.getElementById("mobMenu");
+      const navHam = document.getElementById("navHam");
+      let open = false;
+      function toggleMenu() {
+        open = !open;
+        navHam.classList.toggle("open", open);
+        if (open) {
+          mobMenu.style.display = "flex";
+          setTimeout(() => mobMenu.classList.add("open"), 10);
+          document.body.style.overflow = "hidden";
+        } else {
+          mobMenu.classList.remove("open");
+          setTimeout(() => (mobMenu.style.display = "none"), 300);
+          document.body.style.overflow = "";
+        }
+      }
+      function closeMenu() {
+        open = false;
+        navHam.classList.remove("open");
+        mobMenu.classList.remove("open");
+        setTimeout(() => (mobMenu.style.display = "none"), 300);
+        document.body.style.overflow = "";
+      }
+
+      const obs = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          }),
+        { threshold: 0.1 },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
+    </script>
+  </body>
+</html>
